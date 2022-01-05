@@ -33,7 +33,7 @@ jobs:
       run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
       
     - name: Publish
-      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} ${{ env.SOURCE_CODE_PATH }}
+      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/razorpageapp ${{ env.SOURCE_CODE_PATH }}
       
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
