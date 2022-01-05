@@ -8,18 +8,24 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  DOTNET_VERSION: '6.0.x'
+  SOURCE_CODE_PATH: 'dotnet/aspnetcore/razorpageapp/razorpageapp.csproj'
+  BUILD_CONFIGURATION: Release
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
-      run: dotnet restore dotnet/aspnetcore/razorpageapp/razorpageapp.csproj
+      run: dotnet restore ${{ env.SOURCE_CODE_PATH }}
     - name: Build
-      run: dotnet build --no-restore dotnet/aspnetcore/razorpageapp/razorpageapp.csproj
+      run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
+    - name: Publish
+      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} ${{ env.SOURCE_CODE_PATH }}
