@@ -9,7 +9,7 @@ on:
 
 env:
   PYTHON_VERSION: '3.7'
-  SOURCE_CODE_PATH: 'python/fastapi'
+  SOURCE_CODE_PATH: 'python/django'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
 
 jobs:
@@ -26,6 +26,7 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
+          cd ${{ env.SOURCE_CODE_PATH }}
           python -m venv venv
           source venv/bin/activate
       
