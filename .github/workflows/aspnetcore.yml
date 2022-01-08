@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
     - 'dotnet/aspnetcore/**'
+  workflow_dispatch:
 
 env:
   DOTNET_VERSION: '6.0.x'
