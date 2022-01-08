@@ -42,8 +42,8 @@ jobs:
         with:
           name: python-app
           path: |
-            . 
-            !venv/
+            ${{ env.SOURCE_CODE_PATH }}
+            !${{ env.SOURCE_CODE_PATH }}/venv/
 
   deploy:
     runs-on: ubuntu-latest
