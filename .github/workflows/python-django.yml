@@ -9,12 +9,15 @@ on:
 
 env:
   PYTHON_VERSION: '3.7'
-  SOURCE_CODE_PATH: 'python/fastapi'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'python/django'
 
     steps:
       - uses: actions/checkout@v2
@@ -39,8 +42,8 @@ jobs:
         with:
           name: python-app
           path: |
-            . 
-            !venv/
+            ./python/django 
+            !./python/django/venv/
 
   deploy:
     runs-on: ubuntu-latest
