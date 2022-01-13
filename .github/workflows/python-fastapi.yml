@@ -9,12 +9,15 @@ on:
 
 env:
   PYTHON_VERSION: '3.7'
-  SOURCE_CODE_PATH: 'python/fastapi'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'python/fastapi'
 
     steps:
       - uses: actions/checkout@v2
@@ -30,15 +33,15 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r ${{ env.SOURCE_CODE_PATH }}/requirements.txt
+        run: pip install -r requirements.txt
       
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            ${{ env.SOURCE_CODE_PATH}} 
-            !venv/
+            ./python/fastapi 
+            !./python/fastapi/venv/
   deploy:
     runs-on: ubuntu-latest
     needs: build
