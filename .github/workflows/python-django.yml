@@ -12,6 +12,10 @@ env:
   SOURCE_CODE_PATH: 'python/django'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
 
+defaults:
+  run:
+    working-directory: ${{ env.SOURCE_CODE_PATH }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,14 +30,11 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          cd ${{ env.SOURCE_CODE_PATH }}
           python -m venv venv
           source venv/bin/activate
       
       - name: Install dependencies
-        run: |
-          cd ${{ env.SOURCE_CODE_PATH }}
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
@@ -42,8 +43,8 @@ jobs:
         with:
           name: python-app
           path: |
-            ${{ env.SOURCE_CODE_PATH }}
-            !${{ env.SOURCE_CODE_PATH }}/venv/
+            . 
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
