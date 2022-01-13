@@ -9,16 +9,15 @@ on:
 
 env:
   PYTHON_VERSION: '3.7'
-  SOURCE_CODE_PATH: 'python/django'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
-
-defaults:
-  run:
-    working-directory: ${{ env.SOURCE_CODE_PATH }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: 'python/django'
 
     steps:
       - uses: actions/checkout@v2
