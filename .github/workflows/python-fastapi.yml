@@ -10,6 +10,7 @@ on:
 env:
   PYTHON_VERSION: '3.7'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
+  env.AZURE_WEBAPP_PACKAGE_PATH: '.'
 
 jobs:
   build:
@@ -54,7 +55,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: python-app
-          path: .
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
@@ -63,3 +64,4 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
