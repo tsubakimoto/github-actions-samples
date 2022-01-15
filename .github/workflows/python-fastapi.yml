@@ -11,7 +11,6 @@ env:
   PYTHON_VERSION: '3.7'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
   AZURE_WEBAPP_PACKAGE_PATH: '.'
-  STARTUP_COMMAND: 'python -m uvicorn main:app --host 0.0.0.0 --port 80'
 
 jobs:
   build:
@@ -67,4 +66,3 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-          startup-command: ${{ env.STARTUP_COMMAND }}
