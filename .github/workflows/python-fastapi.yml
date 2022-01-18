@@ -10,7 +10,7 @@ on:
 env:
   PYTHON_VERSION: '3.7'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  AZURE_WEBAPP_PACKAGE_PATH: './python/fastapi'
 
 jobs:
   build:
@@ -36,29 +36,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
-      - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v2
-        with:
-          name: python-app
-          path: |
-            ./python/fastapi 
-            !./python/fastapi/venv/
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
-        with:
-          name: python-app
-          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: Building web app
+        uses: azure/appservice-build@v2
           
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
