@@ -5,6 +5,12 @@ GitHub Actionsを色々試すリポジトリ
 
 ### ASP.NET Core
 
+#### アプリケーション設定
+不要
+
+#### 全般設定
+- スタートアップコマンド：不要
+
 ## Python
 
 ### Django
@@ -34,3 +40,13 @@ GitHub Actionsを色々試すリポジトリ
 
 #### 全般設定
 - スタートアップコマンド：`python -m uvicorn main:app --host 0.0.0.0`
+
+## Node
+
+### Express
+
+#### アプリケーション設定
+不要
+
+#### 全般設定
+- スタートアップコマンド：不要
