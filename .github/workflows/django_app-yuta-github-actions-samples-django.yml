@@ -10,17 +10,25 @@ on:
       - django
   workflow_dispatch:
 
+env:
+  PYTHON_VERSION: '3.7'
+  WORKING_DIRECTORY: python/django
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+        
     steps:
       - uses: actions/checkout@v2
 
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.7'
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create and start virtual environment
         run: |
@@ -30,15 +38,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
-      
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            . 
-            !venv/
+            ./${{ env.WORKING_DIRECTORY }} 
+            !./${{ env.WORKING_DIRECTORY }}/venv/
 
   deploy:
     runs-on: ubuntu-latest
