@@ -9,6 +9,9 @@ on:
       - dotnet
   workflow_dispatch:
 
+env:
+  DOTNET_ROOT: dotnet/aspnetcore
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,13 +29,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/razorpageapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/razorpageapp
 
   deploy:
     runs-on: ubuntu-latest
