@@ -9,7 +9,7 @@ on:
 
 env:
   DOTNET_VERSION: '6.0.x'
-  SOURCE_CODE_PATH: 'dotnet/aspnetcore/razorpageapp/razorpageapp.csproj'
+  SOURCE_CODE_PATH: 'razorpageapp/razorpageapp.csproj'
   BUILD_CONFIGURATION: Release
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
@@ -17,6 +17,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: 'dotnet/aspnetcore'
+        
     steps:
     - uses: actions/checkout@v2
     
@@ -32,11 +37,11 @@ jobs:
       run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
       
     - name: Publish
-      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/razorpageapp ${{ env.SOURCE_CODE_PATH }}
+      run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp ${{ env.SOURCE_CODE_PATH }}
       
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/razorpageapp'
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
