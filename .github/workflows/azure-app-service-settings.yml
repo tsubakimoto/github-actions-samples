@@ -1,0 +1,23 @@
+name: Azure App Service Settings
+
+on:
+  workflow_dispatch:
+  
+env:
+  AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+      - name: Azure App Service Settings
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: ${{env.AZURE_WEBAPP_NAME}}
+          slot-name: 'Production'
+          app-settings-json: '${{secrets.AZURE_WEBAPP_APP_SETTINGS}}'
