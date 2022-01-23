@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: php-app
-          path: .
+          path: ${{ env.WORKING_DIRECTORY }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -76,5 +76,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
