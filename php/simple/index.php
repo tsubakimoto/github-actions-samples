@@ -1,3 +1,6 @@
 <?php
+require 'vendor/autoload.php';
 
-echo "Hello PHP World!";
+use Carbon\Carbon;
+
+printf("Hello PHP World! Now: %s", Carbon::now());
