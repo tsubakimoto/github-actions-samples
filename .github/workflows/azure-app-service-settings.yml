@@ -19,3 +19,5 @@ jobs:
           slot-name: 'Production'
           app-settings-json: '${{secrets.AZURE_WEBAPP_APP_SETTINGS}}'
           general-settings-json: '${{secrets.AZURE_WEBAPP_GENERAL_SETTINGS}}'
+      - name: Azure Logout
+        run: az logout
