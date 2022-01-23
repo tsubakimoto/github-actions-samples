@@ -59,4 +59,4 @@ https://github.com/marketplace/actions/azure-app-service-settings
 - アプリケーション設定
   - `[{"name":"key1","value":"value1","slotSetting":false}]`
 - 全般設定
-  - `{"linuxFxVersion": "DOTNETCORE|5.0"}`
+  - `{"linuxFxVersion":"DOTNETCORE|5.0", "appCommandLine":"this-is-startup-command"}`
