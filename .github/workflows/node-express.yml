@@ -8,8 +8,6 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: 'app-yuta-github-actions-samples'
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
   NODE_VERSION: '16.x'
   WORKING_DIRECTORY: nodejs/express
 
@@ -60,6 +58,6 @@ jobs:
         id: deploy-to-webapp 
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           slot-name: 'Production'
