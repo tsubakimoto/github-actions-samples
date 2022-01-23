@@ -18,3 +18,4 @@ jobs:
           app-name: ${{secrets.AZURE_WEBAPP_NAME}}
           slot-name: 'Production'
           app-settings-json: '${{secrets.AZURE_WEBAPP_APP_SETTINGS}}'
+          general-settings-json: '${{secrets.AZURE_WEBAPP_GENERAL_SETTINGS}}'
