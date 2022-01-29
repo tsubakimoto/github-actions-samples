@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PHP_VERSION: '8.x'
+  PHP_VERSION: '7.4.x'
   WORKING_DIRECTORY: php/laravel
 
 jobs:
