@@ -61,6 +61,15 @@ GitHub Actionsを色々試すリポジトリ
 #### 全般設定
 - スタートアップコマンド：不要
 
+### [Laravel](php/laravel)
+
+#### アプリケーション設定
+不要
+
+#### 全般設定
+- スタートアップコマンド：`/home/site/wwwroot/deployment/startupcommand.sh`
+  - [startupcommand.sh](php/laravel/deployment/startupcommand.sh)
+
 ## Azure
 
 ### App Service
