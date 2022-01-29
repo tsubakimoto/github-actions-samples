@@ -64,11 +64,13 @@ GitHub Actionsを色々試すリポジトリ
 ### [Laravel](php/laravel)
 
 #### アプリケーション設定
-不要
+- `APP_KEY` : `php artisan key:generate --show` で生成されたキー
+  - https://docs.microsoft.com/ja-jp/azure/app-service/tutorial-php-mysql-app?pivots=platform-linux#configure-laravel-environment-variables
+- `APP_DEBUG` : `true` or `false`
 
 #### 全般設定
-- スタートアップコマンド：`/home/site/wwwroot/deployment/startupcommand.sh`
-  - [startupcommand.sh](php/laravel/deployment/startupcommand.sh)
+- マイナーバージョン : PHP 7.4
+- スタートアップコマンド：不要
 
 ## Azure
 
