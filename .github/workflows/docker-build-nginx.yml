@@ -1,0 +1,22 @@
+name: Build Nginx Image
+
+on:
+  workflow_dispatch:
+
+env:
+  WORKING_DIRECTORY: container/nginx
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag mynginx:$(date +%s)
