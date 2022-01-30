@@ -81,3 +81,8 @@ https://github.com/marketplace/actions/azure-app-service-settings
   - `[{"name":"key1","value":"value1","slotSetting":false}]`
 - 全般設定
   - `{"linuxFxVersion":"DOTNETCORE|5.0", "appCommandLine":"this-is-startup-command"}`
+
+## コンテナー
+
+### ビルド・発行
+- [Dockerイメージの公開 - GitHub Docs](https://docs.github.com/ja/actions/publishing-packages/publishing-docker-images)
