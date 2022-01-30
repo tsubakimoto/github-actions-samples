@@ -5,6 +5,7 @@ on:
 
 env:
   WORKING_DIRECTORY: container/nginx
+  IMAGE_TAG: $(date +%s)
 
 jobs:
 
@@ -19,4 +20,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag mynginx:$(date +%s)
+      run: docker build . --file Dockerfile --tag mynginx:${{ env.IMAGE_TAG }}
