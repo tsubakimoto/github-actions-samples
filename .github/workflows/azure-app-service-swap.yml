@@ -1,0 +1,24 @@
+name: Azure App Service Swap
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    environment: webapp
+
+    steps:
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Swap to production slot
+        run: |
+          az webapp deployment slot swap --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --slot sub --target-slot production
+          echo "Swap finished. WebApp accessible at https://$(az webapp show --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --query hostNames[0] -o tsv)"
+
+      - name: Azure Logout
+        run: az logout
