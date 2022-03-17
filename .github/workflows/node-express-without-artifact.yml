@@ -1,4 +1,4 @@
-name: Nodejs Express
+name: Nodejs Express without Artifact
 
 on:
   push:
