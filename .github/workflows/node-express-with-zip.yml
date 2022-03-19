@@ -10,6 +10,7 @@ on:
 env:
   NODE_VERSION: '16.x'
   WORKING_DIRECTORY: nodejs/express
+  ARCHIVE_NAME: node-app.zip
 
 jobs:
   build:
@@ -35,10 +36,17 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip output
+        run: zip -qq -r ${{ env.ARCHIVE_NAME }} .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: ${{ env.ARCHIVE_NAME }}
           path: ${{ env.WORKING_DIRECTORY }}
 
   deploy:
@@ -61,3 +69,4 @@ jobs:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           slot-name: 'Production'
+          package: ${{ env.ARCHIVE_NAME }}
