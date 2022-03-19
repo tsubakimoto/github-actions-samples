@@ -10,7 +10,8 @@ on:
 env:
   NODE_VERSION: '16.x'
   WORKING_DIRECTORY: nodejs/express
-  ARCHIVE_NAME: node-app.zip
+  PACKAGE_NAME: node-app
+  ARCHIVE_NAME: express.zip
 
 jobs:
   build:
@@ -46,8 +47,8 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.ARCHIVE_NAME }}
-          path: ${{ env.WORKING_DIRECTORY }}
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.WORKING_DIRECTORY }}/${{ env.ARCHIVE_NAME }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -60,7 +61,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.ARCHIVE_NAME }}
+          name: ${{ env.PACKAGE_NAME }}
 
       - name: 'Deploy to Azure WebApp'
         id: deploy-to-webapp 
