@@ -34,7 +34,6 @@ jobs:
       - name: npm install, build, and test
         run: |
           yarn install
-          yarn build
           yarn generate
           
       - name: Install zip
