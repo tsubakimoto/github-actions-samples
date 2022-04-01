@@ -35,6 +35,7 @@ jobs:
         run: |
           yarn install
           yarn build
+          yarn generate
           
       - name: Install zip
         uses: montudor/action-zip@v1
