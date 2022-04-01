@@ -1,4 +1,4 @@
-name: Nodejs NuxtJS
+name: Nodejs NuxtJS with Zip
 
 on:
   push:
