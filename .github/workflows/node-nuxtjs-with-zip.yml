@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ${{ env.WORKING_DIRECTORY }}
 
-      - name: npm install, build, and test
+      - name: yarn install and generate
         run: |
           yarn install
           yarn generate
