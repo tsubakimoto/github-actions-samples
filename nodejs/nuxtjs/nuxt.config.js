@@ -1,41 +1,54 @@
+
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  /*
+  ** Headers of the page
+  */
   head: {
-    title: 'nuxtjs',
-    htmlAttrs: {
-      lang: 'en'
-    },
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+	{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Sans:300,400,700,800'}
     ]
   },
-
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#fff' },
+  /*
+  ** Global CSS
+  */
   css: [
+    '~/css/reset.css',
+    '~/css/main.css',
   ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  /*
+  ** Plugins to load before mounting the App
+  */
   plugins: [
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  /*
+  ** Nuxt.js dev-modules
+  */
   buildModules: [
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
+  /*
+  ** Nuxt.js modules
+  */
   modules: [
   ],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
+  /*
+  ** Build configuration
+  */
   build: {
+    /*
+    ** You can extend webpack config here
+    */
+    extend (config, ctx) {
+    }
   }
 }
