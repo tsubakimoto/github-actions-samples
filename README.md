@@ -51,7 +51,12 @@ GitHub Actionsを色々試すリポジトリ
 #### 全般設定
 - スタートアップコマンド：不要
 
-### NuxtJS
+### [NuxtJS](nodejs/nuxtjs/)
+
+#### Azure App Service
+- スタートアップコマンド：`node /home/site/wwwroot/node_modules/nuxt/bin/nuxt.js start`
+
+#### Azure Static Web Apps
 [Tutorial: Deploy server-rendered Nuxt.js websites on Azure Static Web Apps | Microsoft Docs](https://docs.microsoft.com/en-us/azure/static-web-apps/deploy-nuxtjs?WT.mc_id=AZ-MVP-5002209)
 
 ## PHP
