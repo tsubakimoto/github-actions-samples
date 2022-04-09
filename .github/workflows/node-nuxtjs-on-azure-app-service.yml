@@ -1,4 +1,4 @@
-name: Node NuxtJS on App Service
+name: Nodejs NuxtJS on App Service
 
 on:
   push:
