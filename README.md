@@ -3,7 +3,7 @@ GitHub Actionsを色々試すリポジトリ
 
 ## .NET
 
-### ASP.NET Core
+### [ASP.NET Core](dotnet/aspnetcore/)
 
 #### アプリケーション設定
 不要
@@ -13,7 +13,7 @@ GitHub Actionsを色々試すリポジトリ
 
 ## Python
 
-### Django
+### [Django](python/django/)
 
 #### アプリケーション設定
 ```json
@@ -27,7 +27,7 @@ GitHub Actionsを色々試すリポジトリ
 #### 全般設定
 - スタートアップコマンド：不要
 
-### FastAPI
+### [FastAPI](python/fastapi/)
 
 #### アプリケーション設定
 ```json
@@ -43,7 +43,7 @@ GitHub Actionsを色々試すリポジトリ
 
 ## Node
 
-### Express
+### [Express](nodejs/express/)
 
 #### アプリケーション設定
 不要
@@ -61,7 +61,7 @@ GitHub Actionsを色々試すリポジトリ
 
 ## PHP
 
-### フレームワーク無し
+### [フレームワーク無し](php/simple/)
 
 #### アプリケーション設定
 不要
