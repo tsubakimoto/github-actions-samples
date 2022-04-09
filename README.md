@@ -54,6 +54,24 @@ GitHub Actionsを色々試すリポジトリ
 ### [NuxtJS](nodejs/nuxtjs/)
 
 #### Azure App Service
+
+##### アプリケーション設定
+```json
+[
+  {
+    "name": "HOST",
+    "value": "0.0.0.0",
+    "slotSetting": false
+  },
+  {
+    "name": "NODE_ENV",
+    "value": "production",
+    "slotSetting": false
+  }
+]
+```
+
+##### 全般設定
 - スタートアップコマンド：`node /home/site/wwwroot/node_modules/nuxt/bin/nuxt.js start`
 
 #### Azure Static Web Apps
