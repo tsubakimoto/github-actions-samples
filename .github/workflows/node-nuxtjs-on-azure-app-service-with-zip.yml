@@ -1,0 +1,73 @@
+name: Nodejs NuxtJS on App Service with Zip
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'nodejs/nuxtjs/**'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '16.x'
+  WORKING_DIRECTORY: nodejs/nuxtjs
+  PACKAGE_NAME: node-app
+  ARCHIVE_NAME: nuxtjs.zip
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ${{ env.WORKING_DIRECTORY }}
+
+      - name: npm install, build, and test
+        run: |
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip output
+        run: zip -qq -r ${{ env.ARCHIVE_NAME }} .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.WORKING_DIRECTORY }}/${{ env.ARCHIVE_NAME }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ env.ARCHIVE_NAME }}
