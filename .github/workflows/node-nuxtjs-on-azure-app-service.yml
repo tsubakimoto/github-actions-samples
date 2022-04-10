@@ -10,6 +10,7 @@ on:
 env:
   NODE_VERSION: '16.x'
   WORKING_DIRECTORY: nodejs/nuxtjs
+  PACKAGE_NAME: node-app
 
 jobs:
   build:
@@ -38,7 +39,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: ${{ env.PACKAGE_NAME }}
           path: ${{ env.WORKING_DIRECTORY }}
 
   deploy:
@@ -52,7 +53,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: ${{ env.PACKAGE_NAME }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
