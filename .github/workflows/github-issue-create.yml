@@ -1,0 +1,21 @@
+# https://github.com/marketplace/actions/create-an-issue
+
+name: Create GitHub Issue
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create an issue
+        uses: JasonEtco/create-an-issue@v2.6.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          assignees: tsubakimoto
+        id: create-issue
+      - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
+      - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
