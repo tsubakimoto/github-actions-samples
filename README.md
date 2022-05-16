@@ -112,3 +112,11 @@ https://github.com/marketplace/actions/azure-app-service-settings
 
 ### ビルド・発行
 - [Dockerイメージの公開 - GitHub Docs](https://docs.github.com/ja/actions/publishing-packages/publishing-docker-images)
+
+## GitHub
+
+- トークンでの認証
+  - [Automatic token authentication - GitHub Docs](https://docs.github.com/en/actions/security-guides/automatic-token-authentication)
+  - [\[GitHub\]secrets.GITHUB_TOKENで実行できる権限について簡単ながらマッピングしてみた | DevelopersIO](https://dev.classmethod.jp/articles/mapping-secrets-github-token/)
+- Issue作成
+  - [Create an issue · Actions · GitHub Marketplace](https://github.com/marketplace/actions/create-an-issue)
