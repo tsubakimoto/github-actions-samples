@@ -3,6 +3,10 @@ name: Azure App Service Swap
 on:
   workflow_dispatch:
   
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -10,15 +14,17 @@ jobs:
     environment: webapp
 
     steps:
-      - name: Azure Login
-        uses: Azure/login@v1
+      - name: Az CLI Login
+        uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Swap to production slot
         run: |
           az webapp deployment slot swap --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.WEB_APP_NAME }} --slot sub --target-slot production
           echo "Swap finished. WebApp accessible at https://$(az webapp show --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} --name ${{ secrets.WEB_APP_NAME }} --query hostNames[0] -o tsv)"
 
-      - name: Azure Logout
+      - name: Az CLI Logout
         run: az logout
