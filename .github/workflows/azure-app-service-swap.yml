@@ -10,8 +10,6 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
-    environment: webapp
 
     steps:
       - name: Az CLI Login
