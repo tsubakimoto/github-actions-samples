@@ -1,6 +1,6 @@
 # https://github.com/marketplace/actions/create-an-issue
 
-name: Create GitHub Issue
+name: GitHub Issue Creation
 
 on:
   workflow_dispatch:
