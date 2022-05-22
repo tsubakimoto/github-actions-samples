@@ -29,3 +29,6 @@ jobs:
           
       - name: Show Azure regions
         run: az account list-locations 
+
+      - name: Az CLI Logout
+        run: az logouut
