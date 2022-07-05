@@ -11,4 +11,4 @@ jobs:
 
     steps:
     - name: Send greeting
-      run: echo "Hello triggered -> ${{ github.event.type }}"
+      run: echo "Hello triggered -> ${{ github.event.action }}"
