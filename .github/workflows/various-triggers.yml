@@ -26,7 +26,7 @@ jobs:
 
   discussion_comment:
     runs-on: ubuntu-latest
-    if: github.event.discussion_comment && github.event.comment
+    if: github.event.discussion && github.event.comment
     steps:
     - name: Discussion comment controling
       run: echo "Triggered on discussion comment by ${{ github.event.action }}, comment ${{ github.event.comment }}"
