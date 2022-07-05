@@ -1,4 +1,4 @@
-name: Various trigger workflow
+name: Various triggers workflow
 
 on:
   issues:
