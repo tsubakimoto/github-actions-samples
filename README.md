@@ -120,3 +120,7 @@ https://github.com/marketplace/actions/azure-app-service-settings
   - [\[GitHub\]secrets.GITHUB_TOKENで実行できる権限について簡単ながらマッピングしてみた | DevelopersIO](https://dev.classmethod.jp/articles/mapping-secrets-github-token/)
 - Issue作成
   - [Create an issue · Actions · GitHub Marketplace](https://github.com/marketplace/actions/create-an-issue)
+
+### トリガー
+- [Triggering a workflow - GitHub Docs](https://docs.github.com/ja/actions/using-workflows/triggering-a-workflow)
+- [ワークフローをトリガーするイベント - GitHub Docs](https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#issues)
