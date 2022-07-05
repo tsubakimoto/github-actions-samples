@@ -19,14 +19,14 @@ jobs:
 
   discussion:
     runs-on: ubuntu-latest
-    if: github.event.discussion
+    if: github.event.discussion && !github.event.comment
     steps:
     - name: Discussion controling
       run: echo "Triggered on discussion by ${{ github.event.action }}"
 
   discussion_comment:
     runs-on: ubuntu-latest
-    if: github.event.discussion_comment
+    if: github.event.discussion_comment && github.event.comment
     steps:
     - name: Discussion comment controling
-      run: echo "Triggered on discussion comment by ${{ github.event.action }}
+      run: echo "Triggered on discussion comment by ${{ github.event.action }}, comment ${{ github.event.comment }}"
