@@ -17,16 +17,16 @@ jobs:
     - name: Issue controling
       run: echo "Triggered on issue by ${{ github.event.action }}"
 
-  discussion:
-    runs-on: ubuntu-latest
-    if: github.event.discussion
-    steps:
-    - name: Discussion controling
-      run: echo "Triggered on discussion by ${{ github.event.action }}"
-
   discussion_comment:
     runs-on: ubuntu-latest
     if: github.event.discussion_comment
     steps:
     - name: Discussion comment controling
       run: echo "Triggered on discussion comment by ${{ github.event.action }}
+
+  discussion:
+    runs-on: ubuntu-latest
+    if: github.event.discussion
+    steps:
+    - name: Discussion controling
+      run: echo "Triggered on discussion by ${{ github.event.action }}"
