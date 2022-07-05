@@ -11,4 +11,4 @@ jobs:
 
     steps:
     - name: Send greeting
-      run: echo "Hello triggered ${{ github.event.action }}, labeld ${{ github.event.label.name }}"
+      run: echo "Hello triggered ${{ github.event.action }}, labeled ${{ github.event.label.name }}"
