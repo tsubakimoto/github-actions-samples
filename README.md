@@ -124,3 +124,6 @@ https://github.com/marketplace/actions/azure-app-service-settings
 ### トリガー
 - [Triggering a workflow - GitHub Docs](https://docs.github.com/ja/actions/using-workflows/triggering-a-workflow)
 - [ワークフローをトリガーするイベント - GitHub Docs](https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#issues)
+
+### Teamsへの通知
+[Notify Teams · Actions · GitHub Marketplace](https://github.com/marketplace/actions/notify-teams)
