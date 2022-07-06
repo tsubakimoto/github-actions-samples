@@ -10,6 +10,12 @@ on:
   workflow_dispatch:
 
 jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Dump context
+      run: echo "${{ github }}"
+
   issue:
     runs-on: ubuntu-latest
     if: github.event.issue
