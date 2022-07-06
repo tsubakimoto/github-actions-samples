@@ -1,0 +1,16 @@
+# https://github.com/marketplace/actions/notify-teams
+name: Notify to Teams
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send a Notification
+      id: notify
+      uses: thechetantalwar/teams-notify@v2
+      with:
+        teams_webhook_url: ${{ secrets.TEAMS_INCOMING_WEBHOOK }}
+        message: "Github Action Build Number ${{ github.run_number }}"
