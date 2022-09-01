@@ -1,4 +1,4 @@
-name: .NET
+name: ASP.NET Core 6.0
 
 on:
   push:
