@@ -9,6 +9,7 @@ on:
 
 env:
   DOTNET_VERSION: '7.0.x'
+  DOTNET_PREVIEW_VERSION: true
   SOURCE_CODE_PATH: 'razorpageapp/razorpageapp.csproj'
   BUILD_CONFIGURATION: Release
 
@@ -31,6 +32,7 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+          include-prerelease: ${{ env.DOTNET_PREVIEW_VERSION }}
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOURCE_CODE_PATH }}
