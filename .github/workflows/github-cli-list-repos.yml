@@ -11,6 +11,6 @@ jobs:
 
     steps:
       - name: List repos
-        run: gh repo list --limit 10 --visibility public
+        run: gh repo list tsubakimoto --limit 10 --public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
