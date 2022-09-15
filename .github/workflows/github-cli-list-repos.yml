@@ -1,3 +1,5 @@
+# https://docs.github.com/ja/actions/using-workflows/using-github-cli-in-workflows
+# https://cli.github.com/manual/gh_repo_list
 name: GitHub CLI List Repos
 
 on:
@@ -9,6 +11,6 @@ jobs:
 
     steps:
       - name: List repos
-        run: gh repo list --limit 10 --visibility public)
+        run: gh repo list --limit 10 --visibility public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
