@@ -1,0 +1,14 @@
+name: GitHub CLI List Repos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List repos
+        run: gh repo list --limit 10 --visibility public)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
