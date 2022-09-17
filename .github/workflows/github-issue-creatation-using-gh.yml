@@ -1,0 +1,16 @@
+# https://cli.github.com/manual/gh_issue
+
+name: GitHub Issue Creation using GitHub CLI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create an issue
+        run: gh issue create --assignee @me --title "Some title" --body-file ".github/ISSUE_TEMPLATE/bug_report.md"
+        id: create-issue
+      - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
+      - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
