@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create an issue
-        run: gh issue create --assignee "@me" --title "Some title" --body "Hello world" --repo $GITHUB_REPOSITORY
+        run: |
+          echo $GITHUB_REPOSITORY
+          gh issue create --title "Some title" --body "Hello world" --repo $GITHUB_REPOSITORY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: create-issue
