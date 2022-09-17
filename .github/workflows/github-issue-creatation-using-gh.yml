@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Create an issue
         run: gh issue create --assignee "@me" --title "Some title" --body "Hello world"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         id: create-issue
       - run: 'echo Created issue number ${{ steps.create-issue.outputs.number }}'
       - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
