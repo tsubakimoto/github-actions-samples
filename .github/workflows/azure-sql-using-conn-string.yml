@@ -16,7 +16,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: azure/sql-action@v1.3
+      - name: Show database version
+        uses: azure/sql-action@v1.3
         with:        
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-          sql-file: './sqlscripts/*.sql'
+          sql-file: './sqlscripts/version.sql'
+
+      - name: Show tables
+        uses: azure/sql-action@v1.3
+        with:        
+          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+          sql-file: './sqlscripts/show-tables.sql'
+
+      - name: Az CLI Logout
+        run: az logout
