@@ -1,0 +1,13 @@
+# https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run
+name: Workflow trigger parent
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: echo Hello world on parent workflow!
