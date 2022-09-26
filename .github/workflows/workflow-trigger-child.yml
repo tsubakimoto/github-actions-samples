@@ -1,0 +1,19 @@
+# https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run
+name: Workflow trigger child
+
+on:
+  workflow_run:
+    workflows: ["Workflow trigger parent"]
+    types: [completed]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'The triggering workflow passed'
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
