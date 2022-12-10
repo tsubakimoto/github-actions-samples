@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  az_login:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,4 +12,9 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{secrets.AZURE_CREDENTIALS}}
-          
+
+      - name: Show Azure regions
+        run: az account list-locations 
+
+      - name: Az CLI Logout
+        run: az logout

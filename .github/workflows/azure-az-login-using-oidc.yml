@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  az_login_with_oidc:
     runs-on: ubuntu-latest
     steps:
       - name: Az CLI Login
@@ -26,7 +26,7 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          
+
       - name: Show Azure regions
         run: az account list-locations 
 
