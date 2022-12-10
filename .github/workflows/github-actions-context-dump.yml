@@ -2,6 +2,14 @@ name: GitHub Actions Context Dump
 
 on:
   workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      envPAT:
+        required: true
+
   workflow_dispatch:
 
 jobs:
