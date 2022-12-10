@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-aspnetcore6:
     runs-on: ubuntu-latest
     
     defaults:
@@ -28,9 +28,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        id: setup
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - run: echo '${{ steps.setup.outputs.dotnet-version }}'
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOURCE_CODE_PATH }}
@@ -39,18 +42,18 @@ jobs:
         run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
 
       - name: Publish
-        run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{env.DOTNET_ROOT}}/myapp ${{ env.SOURCE_CODE_PATH }}
+        run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp ${{ env.SOURCE_CODE_PATH }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ env.DOTNET_ROOT }}/myapp
 
   deploy:
     runs-on: ubuntu-latest
     
-    needs: build
+    needs: build-aspnetcore6
     
     steps:
       - name: Download artifact from build job
