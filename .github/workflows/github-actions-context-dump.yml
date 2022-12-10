@@ -1,0 +1,11 @@
+name: GitHub Actions Context Dump
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+
+    step:
+      - run: echo ${{ github }}
