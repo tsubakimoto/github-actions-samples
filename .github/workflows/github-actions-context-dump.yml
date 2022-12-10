@@ -17,4 +17,5 @@ jobs:
     runs-on: ubuntu-latest
 
     step:
+      - uses: actions/checkout@v2
       - run: echo ${{ github }}
