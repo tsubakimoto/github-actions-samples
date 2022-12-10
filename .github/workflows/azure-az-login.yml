@@ -1,4 +1,4 @@
-name: az login
+name: Az CLI Login using service principal
 
 on:
   workflow_dispatch:
