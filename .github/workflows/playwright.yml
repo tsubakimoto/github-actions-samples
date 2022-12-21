@@ -12,7 +12,7 @@ env:
   WORKING_DIRECTORY: playwright
 
 jobs:
-  test:
+  playwright-test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     defaults:
