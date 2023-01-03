@@ -41,7 +41,8 @@ jobs:
           path: ~/.nuget/packages
           key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-nuget
+            ${{ runner.os }}-nuget-
+            ${{ runner.os }}-
 
       - name: List the state of nuget packages
         if: ${{ steps.cache-nuget.outputs.cache-hit != 'true' }}
