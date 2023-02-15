@@ -11,5 +11,5 @@ jobs:
       - name: Checkout own repository
         uses: actions/checkout@v3
         with:
-          repository: tsubakimoto/dotfiles
+          repository: tsubakimoto/Enviewer
           ref: main
