@@ -24,3 +24,13 @@ jobs:
           repository: tsubakimoto/dotfiles
           token: ${{ secrets.PRIVATE_REPOSITORY_PAT }}
           path: dotfiles
+
+  other:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout other public repository
+        uses: actions/checkout@v3
+        with:
+          repository: dotnet-foundation/Home
+          ref: main
+          path: dotnet-foundation-home
