@@ -1,0 +1,14 @@
+# https://github.com/marketplace/actions/checkout
+name: Checkout other repository
+
+on:
+  workflow_dispatch:
+
+jobs:
+  own:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: https://github.com/tsubakimoto/dotfiles
+          ref: main
