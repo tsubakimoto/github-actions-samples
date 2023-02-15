@@ -9,15 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout own repository
-        if: false
         uses: actions/checkout@v3
 
       - name: Checkout my public repository
-        if: false
         uses: actions/checkout@v3
         with:
           repository: tsubakimoto/Enviewer
           ref: main
+          path: Enviewer
 
       - name: Checkout my private repository
         uses: actions/checkout@v3
