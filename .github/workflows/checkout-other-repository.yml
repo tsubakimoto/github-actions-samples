@@ -19,3 +19,4 @@ jobs:
         with:
           repository: tsubakimoto/dotfiles
           ref: main
+          token: ${{ github.token }}
