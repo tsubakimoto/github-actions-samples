@@ -8,8 +8,14 @@ jobs:
   own:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout own repository
+      - name: Checkout own public repository
         uses: actions/checkout@v3
         with:
           repository: tsubakimoto/Enviewer
+          ref: main
+
+      - name: Checkout own private repository
+        uses: actions/checkout@v3
+        with:
+          repository: tsubakimoto/dotfiles
           ref: main
