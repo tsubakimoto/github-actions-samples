@@ -20,9 +20,8 @@ jobs:
           ref: main
 
       - name: Checkout my private repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: tsubakimoto/dotfiles
-          ref: main
           token: ${{ secrets.PRIVATE_REPOSITORY_PAT }}
           path: dotfiles
