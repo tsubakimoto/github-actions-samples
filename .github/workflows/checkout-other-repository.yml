@@ -19,4 +19,4 @@ jobs:
         with:
           repository: tsubakimoto/dotfiles
           ref: main
-          token: ${{ github.token }}
+          token: ${{ secrets.PRIVATE_REPOSITORY_PAT }}
