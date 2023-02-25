@@ -18,6 +18,13 @@
 			"moby": "true"
 		},
 		"ghcr.io/dhoeric/features/act:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"redhat.vscode-yaml"
+			]
+		}
 	}
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
