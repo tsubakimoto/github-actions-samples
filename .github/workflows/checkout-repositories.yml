@@ -1,11 +1,11 @@
 # https://github.com/marketplace/actions/checkout
-name: Checkout other repository
+name: Checkout repositories
 
 on:
   workflow_dispatch:
 
 jobs:
-  own:
+  checkout-own:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout own repository
@@ -25,7 +25,7 @@ jobs:
           token: ${{ secrets.PRIVATE_REPOSITORY_PAT }}
           path: dotfiles
 
-  other:
+  checkout-other:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout other public repository
