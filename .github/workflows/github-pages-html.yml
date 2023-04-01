@@ -10,8 +10,7 @@ permissions:
   contents: write
   pages: write
   id-token: write
-    
-    
+
 jobs:
   github-pages-build:
     runs-on: ubuntu-latest
