@@ -10,9 +10,6 @@ on:
         default: 'my-release'
         required: true
 
-env:
-  title: ${{ inputs.release-title }}_${{ github.sha }}
-
 jobs:
   github-release-creation:
     runs-on: ubuntu-latest
@@ -31,6 +28,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.sha }}
           prerelease: false
-          title: ${{ env.title }}
+          title: ${{ inputs.release-title }}
           files: |
             README.md
