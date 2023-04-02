@@ -9,6 +9,11 @@ on:
         type: string
         default: 'my-release'
         required: true
+      is-prerelease:
+        description: 'Prerelease?'
+        type: boolean
+        default: true
+        required: true
 
 jobs:
   github-release-creation:
@@ -29,7 +34,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ inputs.release-title }}
-          prerelease: false
+          prerelease: ${{ inputs.is-prerelease }}
           title: ${{ inputs.release-title }}
           files: |
             README.md
