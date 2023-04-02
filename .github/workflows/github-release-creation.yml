@@ -1,5 +1,5 @@
 # https://github.com/marketplace/actions/automatic-releases
-name: Publish content to release using marvinpinto/action-automatic-releases
+name: Publish content to Release using marvinpinto/action-automatic-releases
 
 on:
   workflow_dispatch:
