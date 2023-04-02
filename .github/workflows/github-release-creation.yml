@@ -1,0 +1,36 @@
+# https://github.com/marketplace/actions/automatic-releases
+name: Publish content to release using marvinpinto/action-automatic-releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-title:
+        description: 'Release name'
+        type: string
+        default: 'my-release'
+        required: true
+
+env:
+  title: ${{ inputs.release-title }}_${{ github.sha }}
+
+jobs:
+  github-release-creation:
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag: ${{ steps.release.outputs.automatic_releases_tag }}
+      url: ${{ steps.release.outputs.upload_url }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a Release
+        id: release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ github.sha }}
+          prerelease: false
+          title: ${{ env.title }}
+          files: |
+            README.md
