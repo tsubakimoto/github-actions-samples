@@ -1,0 +1,22 @@
+name: Publish content to Release on push
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  github-release-creation-on-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Create a Release
+        id: release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: false
+          files: |
+            README.md
