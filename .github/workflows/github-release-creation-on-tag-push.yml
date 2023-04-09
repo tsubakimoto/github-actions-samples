@@ -7,7 +7,7 @@ on:
     workflows: 
       - 'Git tag creation'
     types: 
-      - 'complated'
+      - 'completed'
 
 jobs:
   github-release-creation-on-tag-creation:
