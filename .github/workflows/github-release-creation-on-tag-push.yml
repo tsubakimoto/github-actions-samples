@@ -1,9 +1,13 @@
-name: Publish content to Release on push
+# https://www.memory-lovers.blog/entry/2022/11/20/180000
+# https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
+name: Publish content to Release on tag creation
 
 on:
-  push:
-    tags:
-      - v**
+  workflow_run:
+    workflows: 
+      - git-tag-creation
+    types: 
+      - complated
 
 jobs:
   github-release-creation-on-push:
