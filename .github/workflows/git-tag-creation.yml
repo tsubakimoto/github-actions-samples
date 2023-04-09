@@ -14,6 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          echo "Tag: ${{ github.event.inputs.tag-name }}"
-          git tag ${{ github.event.inputs.tag-name }}
-          git push origin ${{ github.event.inputs.tag-name }}
+          echo "v${{ github.event.inputs.tag-name }}" > TAG_NAME
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
