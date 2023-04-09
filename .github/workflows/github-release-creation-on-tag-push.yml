@@ -4,13 +4,11 @@ name: Publish content to Release on tag creation
 
 on:
   workflow_run:
-    workflows: 
-      - git-tag-creation
-    types: 
-      - complated
+    workflows: [Git tag creation]
+    types: [complated]
 
 jobs:
-  github-release-creation-on-push:
+  github-release-creation-on-tag-creation:
     runs-on: ubuntu-latest
     
     steps:
