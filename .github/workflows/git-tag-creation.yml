@@ -1,4 +1,4 @@
-name: Create a git tag
+name: Git tag creation
 
 on:
   workflow_dispatch:
