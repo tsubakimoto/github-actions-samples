@@ -1,0 +1,14 @@
+# https://docs.github.com/ja/actions/using-jobs/running-jobs-in-a-container
+name: Docker run in workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    container:
+      image: hello-world
+#     steps:
+#       - name: Check for dockerenv file
+#         run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
