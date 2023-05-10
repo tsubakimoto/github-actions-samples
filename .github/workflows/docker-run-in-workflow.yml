@@ -18,4 +18,4 @@ jobs:
       options: --cpus 1
     steps:
       - name: Check for dockerenv file
-        run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+        run: (ls /.dockerenv && echo Found dockerenv && cat /.dockerenv) || (echo No dockerenv)
