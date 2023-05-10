@@ -7,8 +7,7 @@ on:
 jobs:
   container-test-job:
     runs-on: ubuntu-latest
-    container:
-      image: hello-world
-#     steps:
-#       - name: Check for dockerenv file
-#         run: (ls /.dockerenv && echo Found dockerenv) || (echo No dockerenv)
+    container: hello-world
+    steps:
+      - name: Check for dockerenv file
+        run: date
