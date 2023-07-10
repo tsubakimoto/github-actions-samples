@@ -15,5 +15,3 @@ jobs:
     steps:
       - name: show variables
         run: echo ${{ vars.WHO_AM_I }}
-      - name: Log out with Azure AD B2C
-        run: az logout
