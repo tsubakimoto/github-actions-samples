@@ -1,0 +1,19 @@
+name: GitHub Actions environment inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: '環境名'
+        required: true
+        type: environment
+  
+jobs:
+  show-vars-on-environment:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: show variables
+        run: echo ${{ vars.WHO_AM_I }}
+      - name: Log out with Azure AD B2C
+        run: az logout
