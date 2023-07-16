@@ -13,5 +13,8 @@ jobs:
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github) }}'
+        
       - name: show variables
         run: echo ${{ vars.WHO_AM_I }}
