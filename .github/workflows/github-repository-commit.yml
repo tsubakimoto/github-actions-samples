@@ -1,0 +1,35 @@
+# https://github.com/skills/hello-github-actions
+name: GitHub repository commit
+
+on:
+  workflow_dispatch:
+    inputs:
+      content:
+        description: 'Content'
+        type: string
+        required: true
+        default: 'This is default content.'
+
+permissions:
+  contents: write
+
+jobs:
+  commit-on-branch:
+    name: Commit a new file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Prepare a branch, and file
+        run: |
+          date >> README.md
+          git checkout -b content
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "Add date to README.md"
+          git push --set-upstream origin $BRANCH
+          git checkout main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
