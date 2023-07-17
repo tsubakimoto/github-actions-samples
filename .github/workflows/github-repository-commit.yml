@@ -20,10 +20,10 @@ jobs:
         run: |
           echo -e "\n" >> README.md
           date >> README.md
-          BRANCH=content
+          BRANCH=content-${{ github.run_id }}
           git checkout -b $BRANCH
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "Add date to README.md"
           git push --set-upstream origin $BRANCH
