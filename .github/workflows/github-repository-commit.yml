@@ -33,6 +33,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create a pull request
-        uses: tsubakimoto/github-actions-samples/.github/workflows/github-pull-request-creation.yml@main
+        uses: ./.github/workflows/github-pull-request-creation.yml
         with:
           branch: $BRANCH
