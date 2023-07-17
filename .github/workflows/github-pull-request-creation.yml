@@ -21,3 +21,5 @@ jobs:
             --base ${{ inputs.branch }} \
             --title $PR_TITLE \
             --body ""
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
