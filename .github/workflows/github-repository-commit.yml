@@ -4,6 +4,9 @@ name: GitHub repository commit
 on:
   workflow_dispatch:
 
+env:
+  BRANCH: content-${{ github.run_id }}
+
 permissions:
   contents: write
 
@@ -20,7 +23,6 @@ jobs:
         run: |
           echo -e "\n" >> README.md
           date >> README.md
-          BRANCH=content-${{ github.run_id }}
           git checkout -b $BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -30,3 +32,7 @@ jobs:
           git checkout main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a pull request
+        uses: tsubakimoto/github-actions-samples/.github/workflows/github-pull-request-creation.yml@main
+        with:
+          branch: $BRANCH

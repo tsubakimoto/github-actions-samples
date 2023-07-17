@@ -1,0 +1,23 @@
+name: GitHub pull request creation
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        description: "Branch name"
+        required: true
+        type: string
+
+env:
+  PR_TITLE: "PR from ${{ inputs.branch }}"
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create a pull request
+        run: |
+          gh pr create \
+            --base ${{ inputs.branch }} \
+            --title $PR_TITLE \
+            --body ""
