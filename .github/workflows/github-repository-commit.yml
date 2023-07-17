@@ -18,6 +18,7 @@ jobs:
           fetch-depth: 0
       - name: Prepare a branch, and file
         run: |
+          echo -e "\n" >> README.md
           date >> README.md
           BRANCH=content
           git checkout -b $BRANCH
