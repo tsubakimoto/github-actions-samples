@@ -22,6 +22,7 @@ jobs:
           git checkout -b content
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git add .
           git commit -m "Add date to README.md"
           git push --set-upstream origin $BRANCH
           git checkout main
