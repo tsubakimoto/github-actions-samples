@@ -25,11 +25,18 @@ jobs:
           echo "**title**"
           echo $TITLE
       - name: Create a pull request
-        run: |
-          gh pr create \
-            --base main \
-            --head $BRANCH \
-            --title "$TITLE" \
-            --body ""
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: ${{ env.BRANCH }}
+          title: ${{ env.TITLE }}
+      # - name: Create a pull request
+      #   run: |
+      #     gh pr create \
+      #       --base main \
+      #       --head $BRANCH \
+      #       --title "$TITLE" \
+      #       --body ""
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
