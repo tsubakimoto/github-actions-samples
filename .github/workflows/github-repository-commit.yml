@@ -32,7 +32,11 @@ jobs:
           git checkout main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create a pull request
+  create-pull-request:
+    name: Create a pull request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call pull request workflow
         uses: ./.github/workflows/github-pull-request-creation.yml
         with:
           branch: $BRANCH
