@@ -12,12 +12,11 @@ env:
   BRANCH: ${{ inputs.branch-name }}
   TITLE: "PR from ${{ inputs.branch-name }}"
 
-permissions:
-  pull-requests: write
-
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
