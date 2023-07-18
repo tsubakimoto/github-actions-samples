@@ -30,7 +30,8 @@ jobs:
       - name: Create a pull request
         run: |
           gh pr create \
-            --base "$BRANCH" \
+            --base main \
+            --head $BRANCH \
             --title "$TITLE" \
             --body ""
         env:
