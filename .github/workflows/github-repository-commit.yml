@@ -40,6 +40,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Call pull request workflow
-        uses: ./.github/workflows/github-pull-request-creation.yml
+        uses: ./.github/workflows/github-pull-request-creation
         with:
           branch: $BRANCH
