@@ -34,6 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   create-pull-request:
     name: Create a pull request
+    needs: commit-on-branch
     runs-on: ubuntu-latest
     steps:
       - name: Call pull request workflow
