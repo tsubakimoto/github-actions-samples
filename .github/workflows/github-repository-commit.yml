@@ -32,8 +32,8 @@ jobs:
           git checkout main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  create-pull-request:
-    name: Create a pull request
+  call-pull-request-workflow:
+    name: Call pull request workflow
     needs: commit-on-branch
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:

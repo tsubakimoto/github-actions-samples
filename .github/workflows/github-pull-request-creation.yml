@@ -15,6 +15,12 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: Dump parameters
+        run: |
+          echo "**branch name**"
+          echo ${{ inputs.branch-name }}
+          echo "**title**"
+          echo $TITLE
       - name: Create a pull request
         run: |
           gh pr create \
