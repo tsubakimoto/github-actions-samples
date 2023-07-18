@@ -9,6 +9,7 @@ on:
         type: string
 
 env:
+  BRANCH: ${{ inputs.branch-name }}
   TITLE: "PR from ${{ inputs.branch-name }}"
 
 jobs:
@@ -18,13 +19,13 @@ jobs:
       - name: Dump parameters
         run: |
           echo "**branch name**"
-          echo ${{ inputs.branch-name }}
+          echo "$BRANCH"
           echo "**title**"
           echo $TITLE
       - name: Create a pull request
         run: |
           gh pr create \
-            --base ${{ inputs.branch-name }} \
+            --base "$BRANCH" \
             --title "$TITLE" \
             --body ""
         env:

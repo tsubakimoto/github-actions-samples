@@ -14,12 +14,15 @@ jobs:
   commit-on-branch:
     name: Commit a new file
     runs-on: ubuntu-latest
+    outputs:
+      branch-name: ${{ steps.commit-step.outputs.branch-name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - name: Prepare a branch, and file
+        id: commit-step
         run: |
           echo -e "\n" >> README.md
           date >> README.md
@@ -30,6 +33,8 @@ jobs:
           git commit -m "Add date to README.md"
           git push --set-upstream origin $BRANCH
           git checkout main
+          echo "branch-name: $BRANCH"
+          echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   call-pull-request-workflow:
@@ -37,4 +42,4 @@ jobs:
     needs: commit-on-branch
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
-      branch-name: $BRANCH
+      branch-name: ${{ needs.commit-on-branch.outputs.branch-name }}
