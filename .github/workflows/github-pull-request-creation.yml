@@ -19,7 +19,7 @@ jobs:
         run: |
           gh pr create \
             --base ${{ inputs.branch-name }} \
-            --title $TITLE \
+            --title "$TITLE" \
             --body ""
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
