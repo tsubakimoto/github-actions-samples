@@ -35,11 +35,6 @@ jobs:
   create-pull-request:
     name: Create a pull request
     needs: commit-on-branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Call pull request workflow
-        uses: tsubakimoto/github-actions-samples/.github/workflows/github-pull-request-creation.yml@main
-        with:
-          branch: $BRANCH
+    uses: ./.github/workflows/github-pull-request-creation.yml
+    with:
+      branch: $BRANCH
