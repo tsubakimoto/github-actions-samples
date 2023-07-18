@@ -3,13 +3,13 @@ name: GitHub pull request creation
 on:
   workflow_call:
     inputs:
-      branch:
+      branch-name:
         description: "Branch name"
         required: true
         type: string
 
 env:
-  PR_TITLE: "PR from ${{ inputs.branch }}"
+  TITLE: "PR from ${{ inputs.branch-name }}"
 
 jobs:
   create-pull-request:
@@ -18,8 +18,8 @@ jobs:
       - name: Create a pull request
         run: |
           gh pr create \
-            --base ${{ inputs.branch }} \
-            --title $PR_TITLE \
+            --base ${{ inputs.branch-name }} \
+            --title $TITLE \
             --body ""
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
