@@ -12,6 +12,9 @@ env:
   BRANCH: ${{ inputs.branch-name }}
   TITLE: "PR from ${{ inputs.branch-name }}"
 
+permissions:
+  contents: write
+
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
