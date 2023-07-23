@@ -9,10 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  DOTNET_VERSION: '8.0.x'
-  DOTNET_PREVIEW_VERSION: true
   DOTNET_FORMAT_VERBOSITY: diag
-  SOURCE_CODE_PATH: 'consoleapp/consoleapp.csproj'
   BRANCH: dotnet-format-${{ github.run_id }}
 
 permissions:
@@ -32,12 +29,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-          include-prerelease: ${{ env.DOTNET_PREVIEW_VERSION }}
+          dotnet-version: '8.0.x'
+          dotnet-quality: 'preview'
       - name: Format on branch
         id: commit-step
         run: |
-          dotnet format $SOURCE_CODE_PATH --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
+          dotnet format consoleapp/consoleapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
+          dotnet format razorpageapp/razorpageapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
           git checkout -b $BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
