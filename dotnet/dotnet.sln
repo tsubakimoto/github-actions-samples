@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorpageapp", "net7.0\razo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8.0", "net8.0", "{82204ABB-A7FD-4904-BAFE-65834AFFFA3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consoleapp", "net8.0\consoleapp\consoleapp.csproj", "{73EC3307-ECBB-4F89-9307-FA59F73C454A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consoleapp", "net8.0\consoleapp\consoleapp.csproj", "{73EC3307-ECBB-4F89-9307-FA59F73C454A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "razorpageapp", "net8.0\razorpageapp\razorpageapp.csproj", "{B7DCC524-D43F-4EE4-8C76-B29F5F595333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{73EC3307-ECBB-4F89-9307-FA59F73C454A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73EC3307-ECBB-4F89-9307-FA59F73C454A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73EC3307-ECBB-4F89-9307-FA59F73C454A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{C50F6517-AE24-4054-AA10-F95F304923DC} = {96F8E184-0AD2-4CC8-8B56-FC064C73E115}
 		{1D2C0B5D-FCFD-4872-B38D-1661C8455F62} = {C6100442-FD97-4ABB-87CD-451375F8E9F2}
 		{73EC3307-ECBB-4F89-9307-FA59F73C454A} = {82204ABB-A7FD-4904-BAFE-65834AFFFA3E}
+		{B7DCC524-D43F-4EE4-8C76-B29F5F595333} = {82204ABB-A7FD-4904-BAFE-65834AFFFA3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8058C698-71A0-4FDF-AB5F-EDA80872CE2F}
