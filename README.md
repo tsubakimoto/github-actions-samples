@@ -127,3 +127,6 @@ https://github.com/marketplace/actions/azure-app-service-settings
 
 ### Teamsへの通知
 [Notify Teams · Actions · GitHub Marketplace](https://github.com/marketplace/actions/notify-teams)
+
+
+Sun Jul 23 04:18:14 UTC 2023
