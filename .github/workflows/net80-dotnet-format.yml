@@ -1,3 +1,4 @@
+# https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format
 name: .NET 8.0 dotnet-format
 
 on:
@@ -35,7 +36,7 @@ jobs:
         id: commit-step
         run: |
           dotnet format consoleapp/consoleapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
-          dotnet format razorpageapp/razorpageapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
+          # dotnet format razorpageapp/razorpageapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
           git checkout -b $BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
