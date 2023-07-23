@@ -33,10 +33,11 @@ jobs:
       - name: Create a pull request
         id: pr
         run: |
-          echo "url=$(gh pr create \
+          url=$(gh pr create \
             --base main \
             --head $BRANCH \
-            --title '$TITLE' \
-            --body '')" >> $GITHUB_OUTPUT
+            --title "$TITLE" \
+            --body "")
+          echo "url=$url" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
