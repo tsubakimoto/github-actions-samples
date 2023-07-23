@@ -10,7 +10,7 @@ on:
     outputs:
       pull-request-url:
         description: "Pull Request URL"
-        value: ${{ jobs.create-pull-request.outputs.url }}
+        value: ${{ jobs.create-pull-request.outputs.pull-request-url }}
 
 env:
   BRANCH: ${{ inputs.branch-name }}
