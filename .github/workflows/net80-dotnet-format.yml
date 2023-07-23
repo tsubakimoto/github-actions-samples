@@ -1,0 +1,60 @@
+name: .NET 8.0 dotnet-format
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dotnet/net8.0/**'
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  DOTNET_PREVIEW_VERSION: true
+  DOTNET_FORMAT_VERBOSITY: diag
+  SOURCE_CODE_PATH: 'consoleapp/consoleapp.csproj'
+  BRANCH: dotnet-format-${{ github.run_id }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-dotnet-format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'dotnet/net8.0'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          include-prerelease: ${{ env.DOTNET_PREVIEW_VERSION }}
+      - name: Format on branch
+        run: |
+          dotnet format $SOURCE_CODE_PATH --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
+          git checkout -b $BRANCH
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .
+          git commit -m "[bot] Auto formatted"
+          git push --set-upstream origin $BRANCH
+          git checkout main
+          echo "branch-name: $BRANCH"
+          echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  call-pull-request-workflow:
+    name: Call pull request workflow
+    needs: run-dotnet-format
+    uses: ./.github/workflows/github-pull-request-creation.yml
+    with:
+      branch-name: ${{ needs.run-dotnet-format.outputs.branch-name }}
+  show-pull-request-url:
+    name: Show pull request url
+    needs: call-pull-request-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.call-pull-request-workflow.outputs.pull-request-url }}
