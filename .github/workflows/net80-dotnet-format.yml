@@ -25,6 +25,8 @@ jobs:
     defaults:
       run:
         working-directory: 'dotnet/net8.0'
+    outputs:
+      branch-name: ${{ steps.commit-step.outputs.branch-name }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -33,6 +35,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
           include-prerelease: ${{ env.DOTNET_PREVIEW_VERSION }}
       - name: Format on branch
+        id: commit-step
         run: |
           dotnet format $SOURCE_CODE_PATH --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
           git checkout -b $BRANCH
