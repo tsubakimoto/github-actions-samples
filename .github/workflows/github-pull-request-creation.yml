@@ -7,6 +7,10 @@ on:
         description: "Branch name"
         required: true
         type: string
+    outputs:
+      pull-request-url:
+        description: "Pull Request URL"
+        value: ${{ jobs.create-pull-request.outputs.url }}
 
 env:
   BRANCH: ${{ inputs.branch-name }}
@@ -15,6 +19,8 @@ env:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
+    outputs:
+      pull-request-url: ${{ steps.pr.outputs.url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,11 +31,12 @@ jobs:
           echo "**title**"
           echo $TITLE
       - name: Create a pull request
+        id: pr
         run: |
-          gh pr create \
+          echo 'url=$(gh pr create \
             --base main \
             --head $BRANCH \
             --title "$TITLE" \
-            --body ""
+            --body "")' >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

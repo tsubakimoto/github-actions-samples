@@ -44,3 +44,9 @@ jobs:
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
       branch-name: ${{ needs.commit-on-branch.outputs.branch-name }}
+  show-pull-request-url:
+    name: Show pull request url
+    needs: call-pull-request-workflow
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ needs.call-pull-request-workflow.outputs.pull-request-url }}
