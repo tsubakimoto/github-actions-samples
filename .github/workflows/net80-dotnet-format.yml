@@ -2,11 +2,12 @@
 name: .NET 8.0 dotnet-format
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'dotnet/net8.0/**'
+  # pushトリガーだと `context.head_ref` が取得できない
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'dotnet/net8.0/**'
   pull_request:
     branches:
       - main
@@ -16,7 +17,8 @@ on:
 
 env:
   DOTNET_FORMAT_VERBOSITY: diag
-  BRANCH: dotnet-format-${{ github.run_id }}
+  BASE_BRANCH: ${{ context.head_ref }}
+  HEAD_BRANCH: dotnet-format-${{ github.run_id }}
 
 permissions:
   contents: write
@@ -29,7 +31,8 @@ jobs:
       run:
         working-directory: 'dotnet/net8.0'
     outputs:
-      branch-name: ${{ steps.commit-step.outputs.branch-name }}
+      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
+      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -42,15 +45,17 @@ jobs:
         run: |
           dotnet format consoleapp/consoleapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
           # dotnet format razorpageapp/razorpageapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
-          git checkout -b $BRANCH
+          git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "[bot] Auto formatted"
-          git push --set-upstream origin $BRANCH
+          git push --set-upstream origin $HEAD_BRANCH
           # git checkout main
-          echo "branch-name: $BRANCH"
-          echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
+          echo "base-branch-name: $BASE_BRANCH"
+          echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
+          echo "head-branch-name: $HEAD_BRANCH"
+          echo "head-branch-name=$HEAD_BRANCH" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   call-pull-request-workflow:
@@ -58,7 +63,8 @@ jobs:
     needs: run-dotnet-format
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
-      branch-name: ${{ needs.run-dotnet-format.outputs.branch-name }}
+      base-branch-name: ${{ needs.run-dotnet-format.outputs.base-branch-name }}
+      head-branch-name: ${{ needs.run-dotnet-format.outputs.head-branch-name }}
   show-pull-request-url:
     name: Show pull request url
     needs: call-pull-request-workflow

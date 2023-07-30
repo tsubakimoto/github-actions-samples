@@ -3,8 +3,12 @@ name: GitHub pull request creation
 on:
   workflow_call:
     inputs:
-      branch-name:
-        description: "Branch name"
+      base-branch-name:
+        description: "Base branch name"
+        required: true
+        type: string
+      head-branch-name:
+        description: "Head branch name"
         required: true
         type: string
     outputs:
@@ -13,8 +17,9 @@ on:
         value: ${{ jobs.create-pull-request.outputs.pull-request-url }}
 
 env:
-  BRANCH: ${{ inputs.branch-name }}
-  TITLE: "PR from ${{ inputs.branch-name }}"
+  BASE_BRANCH: ${{ inputs.base-branch-name }}
+  HEAD_BRANCH: ${{ inputs.head-branch-name }}
+  TITLE: "PR from ${{ inputs.head-branch-name }} to ${{ inputs.base-branch-name }}"
 
 jobs:
   create-pull-request:
@@ -26,16 +31,18 @@ jobs:
         uses: actions/checkout@v3
       - name: Dump parameters
         run: |
-          echo "**branch name**"
-          echo "$BRANCH"
+          echo "**base branch name**"
+          echo "$BASE_BRANCH"
+          echo "**head branch name**"
+          echo "$HEAD_BRANCH"
           echo "**title**"
           echo $TITLE
       - name: Create a pull request
         id: pr
         run: |
           url=$(gh pr create \
-            --base main \
-            --head $BRANCH \
+            --base $BASE_BRANCH \
+            --head $HEAD_BRANCH \
             --title "$TITLE" \
             --body "")
           echo "url=$url" >> $GITHUB_OUTPUT
