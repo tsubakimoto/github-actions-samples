@@ -66,7 +66,7 @@ jobs:
   call-pull-request-workflow:
     name: Call pull request workflow
     needs: commit-on-branch
-    if: ${{ needs.commit-on-branch.outputs.changed }} == 'true'
+    if: needs.commit-on-branch.outputs.changed == 'true'
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
       base-branch-name: ${{ needs.commit-on-branch.outputs.base-branch-name }}
