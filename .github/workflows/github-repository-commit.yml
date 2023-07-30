@@ -47,8 +47,8 @@ jobs:
     needs: commit-on-branch
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
-      base-branch-name: ${{ needs.run-dotnet-format.outputs.base-branch-name }}
-      head-branch-name: ${{ needs.run-dotnet-format.outputs.head-branch-name }}
+      base-branch-name: ${{ needs.commit-on-branch.outputs.base-branch-name }}
+      head-branch-name: ${{ needs.commit-on-branch.outputs.head-branch-name }}
   show-pull-request-url:
     name: Show pull request url
     needs: call-pull-request-workflow
