@@ -7,6 +7,11 @@ on:
       - main
     paths:
       - 'dotnet/net8.0/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'dotnet/net8.0/**'
   workflow_dispatch:
 
 env:
