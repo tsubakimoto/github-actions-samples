@@ -6,7 +6,7 @@ on:
 
 env:
   BASE_BRANCH: main
-  HEAD_BRANCH: dotnet-format-${{ github.run_id }}
+  HEAD_BRANCH: content-${{ github.run_id }}
 
 permissions:
   contents: write
