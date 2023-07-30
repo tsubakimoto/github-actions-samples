@@ -5,7 +5,8 @@ on:
   workflow_dispatch:
 
 env:
-  BRANCH: content-${{ github.run_id }}
+  BASE_BRANCH: main
+  HEAD_BRANCH: dotnet-format-${{ github.run_id }}
 
 permissions:
   contents: write
@@ -16,7 +17,8 @@ jobs:
     name: Commit a new file
     runs-on: ubuntu-latest
     outputs:
-      branch-name: ${{ steps.commit-step.outputs.branch-name }}
+      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
+      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,15 +29,17 @@ jobs:
         run: |
           echo -e "\n" >> README.md
           date >> README.md
-          git checkout -b $BRANCH
+          git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "Add date to README.md"
-          git push --set-upstream origin $BRANCH
-          git checkout main
-          echo "branch-name: $BRANCH"
-          echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
+          git push --set-upstream origin $HEAD_BRANCH
+          # git checkout main
+          echo "base-branch-name: $BASE_BRANCH"
+          echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
+          echo "head-branch-name: $HEAD_BRANCH"
+          echo "head-branch-name=$HEAD_BRANCH" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   call-pull-request-workflow:
@@ -43,7 +47,8 @@ jobs:
     needs: commit-on-branch
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
-      branch-name: ${{ needs.commit-on-branch.outputs.branch-name }}
+      base-branch-name: ${{ needs.run-dotnet-format.outputs.base-branch-name }}
+      head-branch-name: ${{ needs.run-dotnet-format.outputs.head-branch-name }}
   show-pull-request-url:
     name: Show pull request url
     needs: call-pull-request-workflow
