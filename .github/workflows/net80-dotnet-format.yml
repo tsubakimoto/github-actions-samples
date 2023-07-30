@@ -17,7 +17,7 @@ on:
 
 env:
   DOTNET_FORMAT_VERBOSITY: diag
-  BASE_BRANCH: ${{ context.head_ref }}
+  BASE_BRANCH: ${{ github.head_ref }}
   HEAD_BRANCH: dotnet-format-${{ github.run_id }}
 
 permissions:
