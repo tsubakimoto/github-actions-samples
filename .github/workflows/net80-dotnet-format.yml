@@ -59,7 +59,7 @@ jobs:
           git add .
           git commit -m "[bot] Auto formatted"
           git push --set-upstream origin $HEAD_BRANCH
-          git checkout $BASE_BRANCH
+          # git checkout $BASE_BRANCH
           echo "base-branch-name: $BASE_BRANCH"
           echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
           echo "head-branch-name: $HEAD_BRANCH"
