@@ -31,8 +31,9 @@ jobs:
       run:
         working-directory: 'dotnet/net8.0'
     outputs:
-      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
-      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
+      base-branch-name: ${{ steps.commit.outputs.base-branch-name }}
+      head-branch-name: ${{ steps.commit.outputs.head-branch-name }}
+      changed: ${{ steps.verify-diff.outputs.changed }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -40,18 +41,25 @@ jobs:
         with:
           dotnet-version: '8.0.x'
           dotnet-quality: 'preview'
-      - name: Format on branch
-        id: commit-step
+      - name: Format
         run: |
           dotnet format consoleapp/consoleapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
           # dotnet format razorpageapp/razorpageapp.csproj --no-restore --verbosity $DOTNET_FORMAT_VERBOSITY
+      - name: Check if there are any changes
+        id: verify-diff
+        run: |
+          git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
+      - name: Commit
+        if: steps.verify-diff.outputs.changed == 'true'
+        id: commit
+        run: |
           git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "[bot] Auto formatted"
           git push --set-upstream origin $HEAD_BRANCH
-          # git checkout main
+          git checkout $BASE_BRANCH
           echo "base-branch-name: $BASE_BRANCH"
           echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
           echo "head-branch-name: $HEAD_BRANCH"
@@ -61,6 +69,7 @@ jobs:
   call-pull-request-workflow:
     name: Call pull request workflow
     needs: run-dotnet-format
+    if: needs.run-dotnet-format.outputs.changed == 'true'
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
       base-branch-name: ${{ needs.run-dotnet-format.outputs.base-branch-name }}
