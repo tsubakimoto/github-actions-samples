@@ -13,29 +13,36 @@ permissions:
   pull-requests: write
 
 jobs:
-  commit-on-branch:
-    name: Commit a new file
+  edit-test-file:
+    name: Edit a file
     runs-on: ubuntu-latest
-    outputs:
-      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
-      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Prepare a branch, and file
-        id: commit-step
+      - name: Edit a file
         run: |
           echo -e "\n" >> README.md
           date >> README.md
+  commit-on-branch:
+    name: Commit a new file
+    needs: edit-test-file
+    runs-on: ubuntu-latest
+    outputs:
+      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
+      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
+    steps:
+      - name: Prepare a branch, and file
+        id: commit-step
+        run: |
           git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "Add date to README.md"
           git push --set-upstream origin $HEAD_BRANCH
-          # git checkout main
+          git checkout $BASE_BRANCH
           echo "base-branch-name: $BASE_BRANCH"
           echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
           echo "head-branch-name: $HEAD_BRANCH"
