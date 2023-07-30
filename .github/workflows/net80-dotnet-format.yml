@@ -48,7 +48,7 @@ jobs:
           git add .
           git commit -m "[bot] Auto formatted"
           git push --set-upstream origin $BRANCH
-          git checkout main
+          # git checkout main
           echo "branch-name: $BRANCH"
           echo "branch-name=$BRANCH" >> $GITHUB_OUTPUT
         env:
