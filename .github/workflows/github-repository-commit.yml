@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Edit a file
-        if: github.event.inputs.edit
+        if: inputs.edit
         run: |
           echo -e "\n" >> README.md
           date >> README.md
