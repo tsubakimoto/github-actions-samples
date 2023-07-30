@@ -23,8 +23,9 @@ jobs:
     name: Commit a new file
     runs-on: ubuntu-latest
     outputs:
-      base-branch-name: ${{ steps.commit-step.outputs.base-branch-name }}
-      head-branch-name: ${{ steps.commit-step.outputs.head-branch-name }}
+      base-branch-name: ${{ steps.commit.outputs.base-branch-name }}
+      head-branch-name: ${{ steps.commit.outputs.head-branch-name }}
+      changed: ${{ steps.verify-diff.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,25 +36,37 @@ jobs:
         run: |
           echo -e "\n" >> README.md
           date >> README.md
+      # https://stackoverflow.com/a/74325815
+      - name: Check if there are any changes
+        id: verify-diff
+        run: |
+          git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
       - name: Prepare a branch, and file
-        id: commit-step
+        if: steps.verify-diff.outputs.changed == 'true'
+        id: commit
         run: |
           git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add .
           git commit -m "Add date to README.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push to origin
+        if: steps.verify-diff.outputs.changed == 'true'
+        run: |
           git push --set-upstream origin $HEAD_BRANCH
           git checkout $BASE_BRANCH
+      - name: Dump
+        run: |
           echo "base-branch-name: $BASE_BRANCH"
           echo "base-branch-name=$BASE_BRANCH" >> $GITHUB_OUTPUT
           echo "head-branch-name: $HEAD_BRANCH"
           echo "head-branch-name=$HEAD_BRANCH" >> $GITHUB_OUTPUT
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   call-pull-request-workflow:
     name: Call pull request workflow
     needs: commit-on-branch
+    if: ${{ needs.commit-on-branch.outputs.changed }} == 'true'
     uses: ./.github/workflows/github-pull-request-creation.yml
     with:
       base-branch-name: ${{ needs.commit-on-branch.outputs.base-branch-name }}
