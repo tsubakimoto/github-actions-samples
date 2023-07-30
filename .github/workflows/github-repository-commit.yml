@@ -3,6 +3,12 @@ name: GitHub repository commit
 
 on:
   workflow_dispatch:
+    inputs:
+      edit:
+        description: 'to edit'
+        type: boolean
+        default: true
+        required: true
 
 env:
   BASE_BRANCH: main
@@ -27,8 +33,10 @@ jobs:
       - name: Prepare a branch, and file
         id: commit-step
         run: |
-          echo -e "\n" >> README.md
-          date >> README.md
+          if "${{ github.event.inputs.edit }}"; then
+            echo -e "\n" >> README.md
+            date >> README.md
+          fi
           git checkout -b $HEAD_BRANCH
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
