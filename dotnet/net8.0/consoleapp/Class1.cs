@@ -2,7 +2,7 @@
 
 internal class Class1
     {
-        private     string      field1  =   "hoge";
+        private     string      field1  =   "hello world";
 
     public  string  Property1
         =>  field1  ;
