@@ -1,6 +1,8 @@
 # github-actions-samples
 GitHub Actionsを色々試すリポジトリ
 
+[![GitHub Super-Linter](https://github.com/tsubakimoto/github-actions-samples/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 ## .NET
 
 ### [ASP.NET Core](dotnet/aspnetcore/)
