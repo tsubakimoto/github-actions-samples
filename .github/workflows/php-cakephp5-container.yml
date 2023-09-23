@@ -1,0 +1,92 @@
+# https://book.cakephp.org/5/en/installation.html
+name: PHP CakePHP5 Container
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+    - 'php/cakephp5/**'
+  workflow_dispatch:
+
+env:
+  PHP_VERSION: '8.2.x'
+  WORKING_DIRECTORY: php/cakephp5
+  PACKAGE_NAME: php-app
+  ARCHIVE_NAME: cakephp5.zip
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}-cakephp5
+
+permissions:
+  id-token: write
+  contents: read
+  packages: write
+
+jobs:
+  build-cakephp5:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  deploy-cakephp5:
+    runs-on: ubuntu-latest
+    if: false
+    needs: build-cakephp5
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: Az CLI Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}-container
+          slot-name: 'Production'
+          package: ${{ env.ARCHIVE_NAME }}
+
+      - name: Az CLI Logout
+        run: az logout
