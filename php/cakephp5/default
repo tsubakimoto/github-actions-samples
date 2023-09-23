@@ -1,14 +1,18 @@
-server {
-    listen   80;
-    listen   [::]:80;
-    # server_name www.example.com;
-    # return 301 http://example.com$request_uri;
+location / {
+    try_files $uri $uri/ /index.php?$args;
 }
 
 server {
     listen   80;
     listen   [::]:80;
-    # server_name example.com;
+    server_name www.example.com;
+    return 301 http://example.com$request_uri;
+}
+
+server {
+    listen   80;
+    listen   [::]:80;
+    server_name example.com;
 
     root   /home/site/wwwroot/webroot;
     index  index.php;
