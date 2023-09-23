@@ -1,0 +1,31 @@
+server {
+    listen   80;
+    listen   [::]:80;
+    # server_name www.example.com;
+    # return 301 http://example.com$request_uri;
+}
+
+server {
+    listen   80;
+    listen   [::]:80;
+    # server_name example.com;
+
+    root   /home/site/wwwroot/webroot;
+    index  index.php;
+
+    access_log /home/site/wwwroot/logs/access.log;
+    error_log /home/site/wwwroot/logs/error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_intercept_errors on;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}
