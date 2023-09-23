@@ -15,13 +15,13 @@ jobs:
       - name: Az CLI Login
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
       - name: Azure App Service Settings
         uses: Azure/appservice-settings@v1
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           app-settings-json: '${{ secrets.AZURE_WEBAPP_APP_SETTINGS }}'
           general-settings-json: '${{ secrets.AZURE_WEBAPP_GENERAL_SETTINGS }}'
