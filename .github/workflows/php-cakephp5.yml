@@ -11,6 +11,8 @@ on:
 env:
   PHP_VERSION: '8.2.x'
   WORKING_DIRECTORY: php/cakephp5
+  PACKAGE_NAME: php-app
+  ARCHIVE_NAME: cakephp5.zip
 
 permissions:
   id-token: write
@@ -57,11 +59,18 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip output
+        run: zip -qq -r ${{ env.ARCHIVE_NAME }} .
+        working-directory: ${{ env.WORKING_DIRECTORY }}
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: php-app
-          path: ${{ env.WORKING_DIRECTORY }}
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.WORKING_DIRECTORY }}/${{ env.ARCHIVE_NAME }}
 
   deploy-cakephp5:
     runs-on: ubuntu-latest
@@ -74,7 +83,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: php-app
+          name: ${{ env.PACKAGE_NAME }}
 
       - name: Az CLI Login
         uses: azure/login@v1
@@ -89,7 +98,7 @@ jobs:
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
-          package: .
+          package: ${{ env.ARCHIVE_NAME }}
 
       - name: Az CLI Logout
         run: az logout
