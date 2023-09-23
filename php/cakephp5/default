@@ -1,35 +1,48 @@
-location / {
-    try_files $uri $uri/ /index.php?$args;
-}
-
 server {
-    listen   80;
-    listen   [::]:80;
-    server_name www.example.com;
-    return 301 http://example.com$request_uri;
-}
+    #proxy_cache cache;
+    #proxy_cache_valid 200 1s;
+    listen 8080;
+    listen [::]:8080;
+    root /home/site/wwwroot/webroot; # Changed for Laravel
+    index  index.php index.html index.htm;
+    server_name  example.com www.example.com; 
+    port_in_redirect off;
 
-server {
-    listen   80;
-    listen   [::]:80;
-    server_name example.com;
-
-    root   /home/site/wwwroot/webroot;
-    index  index.php;
-
-    access_log /home/site/wwwroot/logs/access.log;
-    error_log /home/site/wwwroot/logs/error.log;
-
-    location / {
-        try_files $uri $uri/ /index.php?$args;
+    location / {            
+        index  index.php index.html index.htm hostingstart.html;
+        try_files $uri $uri/ /index.php?$args; # Changed for Laravel
     }
 
-    location ~ \.php$ {
-        try_files $uri =404;
-        include fastcgi_params;
+    # redirect server error pages to the static page /50x.html
+    #
+    #error_page   500 502 503 504  /50x.html; # Commented out for Laravel so that Laravel debug mode pages are shown
+    location = /50x.html {
+        root   /html/;
+    }
+    
+    # Disable .git directory
+    location ~ /\.git {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+
+    # Add locations of phpmyadmin here.
+    location ~ [^/]\.php(/|$) {
+        fastcgi_split_path_info ^(.+?\.php)(|/.*)$;
         fastcgi_pass 127.0.0.1:9000;
-        fastcgi_index index.php;
-        fastcgi_intercept_errors on;
+        include fastcgi_params;
+        fastcgi_param HTTP_PROXY "";
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param QUERY_STRING $query_string;
+        fastcgi_intercept_errors on;
+        fastcgi_connect_timeout         300; 
+        fastcgi_send_timeout           3600; 
+        fastcgi_read_timeout           3600;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_temp_file_write_size 256k;
     }
 }
