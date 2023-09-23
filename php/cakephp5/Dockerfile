@@ -30,7 +30,7 @@ RUN a2enmod rewrite
 COPY . /var/www/html
 
 # Composerで依存関係をインストール
-RUN composer install --no-interaction --no-plugins --no-scripts
+RUN composer install --no-interaction --no-plugins
 
 # tmpディレクトリとlogsディレクトリのパーミッションを設定
 RUN chmod -R 777 /var/www/html/tmp
