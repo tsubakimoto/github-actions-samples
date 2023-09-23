@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTHON_VERSION: '3.7'
+  PYTHON_VERSION: '3.11'
   WORKING_DIRECTORY: python/django
 
 jobs:
@@ -20,10 +20,10 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Python version
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
