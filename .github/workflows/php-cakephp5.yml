@@ -61,8 +61,8 @@ jobs:
 
       - name: Set permissions
         run: |
-          chmod -R 777 ${{ env.WORKING_DIRECTORY }}/tmp \
-            && chmod -R 777 ${{ env.WORKING_DIRECTORY }}/logs
+          chmod -R 777 tmp \
+            && chmod -R 777 logs
 
       - name: Install zip
         uses: montudor/action-zip@v1
