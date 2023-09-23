@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-express:
     runs-on: ubuntu-latest
 
     defaults:
@@ -45,9 +45,9 @@ jobs:
           name: node-app
           path: ${{ env.WORKING_DIRECTORY }}
 
-  deploy:
+  deploy-express:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-express
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

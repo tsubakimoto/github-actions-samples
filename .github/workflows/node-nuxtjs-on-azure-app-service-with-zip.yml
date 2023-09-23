@@ -14,7 +14,7 @@ env:
   ARCHIVE_NAME: nuxtjs.zip
 
 jobs:
-  build:
+  build-nuxtjs-zip:
     runs-on: ubuntu-latest
 
     defaults:
@@ -50,9 +50,9 @@ jobs:
           name: ${{ env.PACKAGE_NAME }}
           path: ${{ env.WORKING_DIRECTORY }}/${{ env.ARCHIVE_NAME }}
 
-  deploy:
+  deploy-nuxtjs-zip:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-nuxtjs-zip
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

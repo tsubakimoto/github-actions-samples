@@ -12,7 +12,7 @@ env:
   WORKING_DIRECTORY: php/simple
 
 jobs:
-  build:
+  build-php:
     runs-on: ubuntu-latest
     
     defaults:
@@ -58,9 +58,9 @@ jobs:
           name: php-app
           path: ${{ env.WORKING_DIRECTORY }}
 
-  deploy:
+  deploy-php:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-php
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}

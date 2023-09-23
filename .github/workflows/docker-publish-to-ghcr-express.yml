@@ -1,4 +1,4 @@
-name: Publish Express Image to ghcr.io
+name: Push Express Image to ghcr.io
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}-express
 
 jobs:
-  build:
+  build-and-push-express-image:
 
     runs-on: ubuntu-latest
 

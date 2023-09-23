@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  az_login:
+  az-login:
     runs-on: ubuntu-latest
 
     steps:

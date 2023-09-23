@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  github-pages-build:
+  build-github-pages:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
         with:
           path: html
 
-  github-pages-deploy:
+  deploy-github-pages:
     needs:
     - github-pages-build
 

@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  swap-azure-app-service-slot:
     runs-on: ubuntu-latest
 
     steps:

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  create_issue:
+  create-issue-using-cli:
     runs-on: ubuntu-latest
     steps:
       - name: Create an issue

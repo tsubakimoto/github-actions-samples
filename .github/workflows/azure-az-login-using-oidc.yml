@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  az_login_with_oidc:
+  az-login-with-oidc:
     runs-on: ubuntu-latest
     steps:
       - name: Az CLI Login

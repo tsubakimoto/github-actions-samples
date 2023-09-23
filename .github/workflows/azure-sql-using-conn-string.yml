@@ -9,19 +9,10 @@ permissions:
   contents: read
 
 jobs:
-  connect_to_azure_sql:
+  connect-to-azure-sql:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      
-      - name: Az CLI Login
-        uses: azure/login@v1
-        with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-
       - name: Show database version
         uses: azure/sql-action@v2
         with:        
@@ -33,6 +24,3 @@ jobs:
         with:        
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
           path: './sqlscripts/show-tables.sql'
-
-      - name: Az CLI Logout
-        run: az logout

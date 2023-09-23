@@ -18,7 +18,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  build-aspnetcore7:
     runs-on: ubuntu-latest
     
     defaults:
@@ -49,10 +49,10 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
+  deploy-aspnetcore7:
     runs-on: ubuntu-latest
     
-    needs: build
+    needs: build-aspnetcore7
     
     steps:
       - name: Download artifact from build job
