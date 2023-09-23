@@ -59,6 +59,11 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
+      - name: Set permissions
+        run: |
+          chmod -R 777 ${{ env.WORKING_DIRECTORY }}/tmp \
+            && chmod -R 777 ${{ env.WORKING_DIRECTORY }}/logs
+
       - name: Install zip
         uses: montudor/action-zip@v1
 
