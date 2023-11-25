@@ -25,4 +25,5 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-   
+    - name: Publish
+      run: dotnet publish --no-build --configuration Release --runtime win-x64 -p:PublishSingleFile=true --self-contained true --output ${{ env.DOTNET_ROOT }}/myapp
