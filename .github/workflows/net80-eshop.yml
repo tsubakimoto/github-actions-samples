@@ -33,6 +33,6 @@ jobs:
       - name: Restore
         run: |
           dotnet restore eShop.Web.slnf
-      # - name: Build
-      #   run: |
-      #     dotnet build --project src/eShop.AppHost/eShop.AppHost.csproj
+      - name: Build
+        run: |
+          dotnet build eShop.Web.slnf
