@@ -1,0 +1,38 @@
+# https://github.com/dotnet/eshop
+name: Build eshop
+
+on:
+  workflow_dispatch:
+    inputs:
+      checkout-version:
+        description: actions/checkout version
+        required: true
+        type: choice
+        options:
+          - v3
+          - v4
+
+env:
+  REPOSITORY: dotnet/eshop
+
+jobs:
+  build-eshop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: ${{ env.REPOSITORY }}
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      - name: Setup workload
+        run: |
+          dotnet workload update
+          dotnet workload install aspire
+      - name: Restore
+        run: |
+          dotnet restore eShop.Web.slnf
+      - name: Build
+        run: |
+          dotnet build eShop.Web.slnf
