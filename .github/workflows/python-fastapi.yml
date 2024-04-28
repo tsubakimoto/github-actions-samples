@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  PYTHON_VERSION: '3.7'
+  PYTHON_VERSION: '3.10'
   WORKING_DIRECTORY: python/fastapi
 
 jobs:
