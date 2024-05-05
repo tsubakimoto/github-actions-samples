@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: 'dotnet/netstandard2.0'
+        working-directory: 'dotnet/netstandard2.0/Standard20Library'
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
