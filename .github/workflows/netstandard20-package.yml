@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 jobs:
@@ -50,7 +50,7 @@ jobs:
           dotnet nuget push **/*.nupkg --source "github"
       - name: Set current datetime
         run: |
-          echo "CURRENT_DATETIME=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+          echo "CURRENT_DATETIME=$(date +'%Y-%m-%d_%H:%M:%S')" >> $GITHUB_ENV
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
