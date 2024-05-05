@@ -1,5 +1,5 @@
 # ref: https://github.com/dotnet/extensions/blob/main/.github/workflows/update-sdk.yml
-name: update-dotnet-sdk
+name: Update .NET SDK
 
 on:
 
