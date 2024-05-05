@@ -48,7 +48,11 @@ jobs:
       - name: Publish NuGet package
         run: |
           dotnet nuget push **/*.nupkg --source "github"
+      - name: Set current datetime
+        run: |
+          echo "CURRENT_DATETIME=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           artifacts: '**/*.nupkg'
+          tag: ${{ env.CURRENT_DATETIME }}
