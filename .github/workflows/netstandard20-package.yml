@@ -5,9 +5,6 @@ name: Publish a package for netstandard2.0
 on:
   workflow_dispatch:
 
-env:
-  WORKING_DIRECTORY: 'dotnet/netstandard2.0/Standard20Library'
-
 permissions:
   contents: read
   packages: write
@@ -17,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: 'dotnet/netstandard2.0/Standard20Library'
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -36,17 +33,24 @@ jobs:
           name: nuget-packages
           path: '**/*.nupkg'
 
+  # https://github.com/users/tsubakimoto/packages/nuget/package/Standard20Library
   publish-package:
     runs-on: ubuntu-latest
     needs: build-package
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: nuget-packages
-          path: ${{ env.WORKING_DIRECTORY}}
-      - name: Prepare
+      - name: Prepare NuGet
         run: |
           dotnet nuget add source --username tsubakimoto --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/tsubakimoto/index.json"
-      - name: Publish
+      - name: Publish NuGet package
         run: |
           dotnet nuget push **/*.nupkg --source "github"
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: '**/*.nupkg'
