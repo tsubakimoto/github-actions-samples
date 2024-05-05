@@ -11,6 +11,9 @@ permissions:
 jobs:
   build-package:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'dotnet/netstandard2.0'
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
