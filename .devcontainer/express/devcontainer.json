@@ -7,9 +7,9 @@
     "waitFor": "onCreateCommand",
     "updateContentCommand": "npm install",
     "postCreateCommand": "npm install -g npm-check-updates",
-    "postAttachCommand": {
-      "server": "npm start"
-    },
+    // "postAttachCommand": {
+    //   "server": "npm start"
+    // },
     // "customizations": {
     //   "codespaces": {
     //     "openFiles": [
