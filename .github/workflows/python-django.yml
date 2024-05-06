@@ -70,7 +70,7 @@ jobs:
       - name: Azure App Service Settings
         uses: Azure/appservice-settings@v1
         with:
-          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-django
           slot-name: 'Production'
           app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"1","slotSetting":false}]'
   
@@ -78,7 +78,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-django
           slot-name: 'Production'
 
       - name: Az CLI Logout
