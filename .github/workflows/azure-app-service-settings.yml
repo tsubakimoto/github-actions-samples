@@ -13,10 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: Production
     steps:
+      - name: Dump context
+        run: echo "${{ toJSON(github) }}"
       - name: Set current datetime as env variable
         env:
           TZ: 'Asia/Tokyo'
-        run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
+        run: |
+          CURRENT_DATETIME=$(date +'%Y-%m-%d_%H:%M:%S')
+          SETTINGS=$(echo ${{ vars.AZURE_WEBAPP_APP_SETTINGS }} | sed "s/{0}/$CURRENT_DATETIME/")
+          echo "SETTINGS=$SETTINGS" >> $GITHUB_ENV
       - name: Az CLI Login
         uses: azure/login@v2
         with:
@@ -28,7 +33,7 @@ jobs:
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
-          app-settings-json: "${{ format(vars.AZURE_WEBAPP_APP_SETTINGS, 'env.CURRENT_DATETIME') }}"
+          app-settings-json: '${{ env.SETTINGS }}'
           general-settings-json: '${{ vars.AZURE_WEBAPP_GENERAL_SETTINGS }}'
       - name: Az CLI Logout
         run: az logout
