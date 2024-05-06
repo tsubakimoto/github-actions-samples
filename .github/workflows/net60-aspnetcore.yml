@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 env:
-  DOTNET_VERSION: '6.0.x'
   SOURCE_CODE_PATH: 'razorpageapp/razorpageapp.csproj'
   BUILD_CONFIGURATION: Release
 
@@ -31,7 +30,7 @@ jobs:
         id: setup
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          global-json-file: dotnet/global.json
 
       - run: echo '${{ steps.setup.outputs.dotnet-version }}'
 
