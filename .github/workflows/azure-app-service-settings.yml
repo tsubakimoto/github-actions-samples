@@ -20,7 +20,7 @@ jobs:
           TZ: 'Asia/Tokyo'
         run: |
           CURRENT_DATETIME=$(date +'%Y-%m-%d_%H:%M:%S')
-          SETTINGS=$(echo ${{ vars.AZURE_WEBAPP_APP_SETTINGS }} | sed "s/{0}/$CURRENT_DATETIME/")
+          SETTINGS=$(echo "${{ vars.AZURE_WEBAPP_APP_SETTINGS }}" | sed "s/{0}/$CURRENT_DATETIME/")
           echo "SETTINGS=$SETTINGS" >> $GITHUB_ENV
       - name: Az CLI Login
         uses: azure/login@v2
@@ -31,7 +31,7 @@ jobs:
       - name: Azure App Service Settings
         uses: Azure/appservice-settings@v1
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
           app-settings-json: '${{ env.SETTINGS }}'
           general-settings-json: '${{ vars.AZURE_WEBAPP_GENERAL_SETTINGS }}'
