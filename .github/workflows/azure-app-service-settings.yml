@@ -28,7 +28,7 @@ jobs:
         with:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
-          app-settings-json: '{"name":"now","value":"${{ env.CURRENT_DATETIME }}","slotSetting":false}'
+          app-settings-json: '[{"name":"now","value":"${{ env.CURRENT_DATETIME }}","slotSetting":false}]'
           general-settings-json: '${{ vars.AZURE_WEBAPP_GENERAL_SETTINGS }}'
       - name: Az CLI Logout
         run: az logout
