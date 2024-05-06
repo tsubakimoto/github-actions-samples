@@ -5,7 +5,23 @@ GitHub Actionsを色々試すリポジトリ
 
 ## .NET
 
-### [ASP.NET Core](dotnet/aspnetcore/)
+### [ASP.NET Core 6](dotnet/net6.0/razorpageapp)
+
+#### アプリケーション設定
+不要
+
+#### 全般設定
+- スタートアップコマンド：不要
+
+### [ASP.NET Core 7](dotnet/net7.0/razorpageapp)
+
+#### アプリケーション設定
+不要
+
+#### 全般設定
+- スタートアップコマンド：不要
+
+### [ASP.NET Core 8](dotnet/net8.0/razorpageapp)
 
 #### アプリケーション設定
 不要
