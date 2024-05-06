@@ -1,15 +1,9 @@
-# https://docs.microsoft.com/en-us/azure/developer/github/connect-from-azure
+# https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure
+# https://github.com/marketplace/actions/azure-login
 
 name: Az CLI Login using OIDC
 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  # push:
-  #   branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -19,16 +13,21 @@ permissions:
 jobs:
   az-login-with-oidc:
     runs-on: ubuntu-latest
+    environment: Production
     steps:
       - name: Az CLI Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
-          client-id: ${{ vars.AZURE_CLIENT_ID }}
-          tenant-id: ${{ vars.AZURE_TENANT_ID }}
-          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Show Azure regions
-        run: az account list-locations 
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account list-locations -o table
 
       - name: Az CLI Logout
         run: az logout

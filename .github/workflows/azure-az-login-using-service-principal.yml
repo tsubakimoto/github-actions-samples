@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  az-login:
+  az-login-using-sp:
     runs-on: ubuntu-latest
-
+    environment: Production
     steps:
       # https://github.com/fluffy-bunny/azure-login-action-act
       - name: Install Azure CLI
@@ -19,12 +19,16 @@ jobs:
           curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
       - name: Azure Login
-        uses: Azure/login@v1
+        uses: Azure/login@v2
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Show Azure regions
-        run: az account list-locations 
-
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account list-locations -o table
+  
       - name: Az CLI Logout
         run: az logout
