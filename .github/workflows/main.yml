@@ -1,0 +1,23 @@
+# https://github.com/actions/hello-world-docker-action
+name: Hello world docker action
+
+on:
+  workflow_dispatch:
+    inputs:
+      who-to-greet:
+        description: Who to greet in the log
+        required: true
+        default: 'World'
+        type: string
+
+jobs:
+  say-hello:
+    name: Say Hello
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print to Log
+        id: print-to-log
+        uses: actions/hello-world-docker-action@main
+        with:
+          who-to-greet: ${{ inputs.who-to-greet }}
