@@ -1,0 +1,17 @@
+name: GitHub Branch Dump
+
+on:
+  push:
+    branches:
+      - develop/yuta/**
+  workflow_dispatch:
+
+jobs:
+  branch-dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump branch
+        run: |
+          BRANCH=${{ github.ref }}
+          RESULT=$(echo "$BRANCH" | cut -d'/' -f4)
+          echo "Name: $RESULT"
