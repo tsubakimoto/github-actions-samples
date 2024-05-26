@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: php-app
-          path: release.zip
+          path: ${{ env.WORKING_DIRECTORY }}/release.zip
 
   deploy-php:
     runs-on: ubuntu-latest
