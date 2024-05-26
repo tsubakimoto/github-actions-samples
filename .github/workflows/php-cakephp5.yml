@@ -9,10 +9,8 @@ on:
   workflow_dispatch:
 
 env:
-  PHP_VERSION: '8.2.x'
+  PHP_VERSION: '8.2'
   WORKING_DIRECTORY: php/cakephp5
-  PACKAGE_NAME: php-app
-  ARCHIVE_NAME: cakephp5.zip
 
 permissions:
   id-token: write
@@ -27,50 +25,46 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@7c0b4c8c8ebed23eca9ec2802474895d105b11bc
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.PHP_VERSION }}
 
       - name: Check if composer.json exists
         id: check_files
-        uses: andstor/file-existence-action@87d74d4732ddb824259d80c8a508c0124bf1c673
+        uses: andstor/file-existence-action@v1
         with:
           files: '${{ env.WORKING_DIRECTORY }}/composer.json'
 
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        if: steps.check_files.outputs.files_exists == 'true'
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      # - name: Get Composer Cache Directory
+      #   id: composer-cache
+      #   if: steps.check_files.outputs.files_exists == 'true'
+      #   run: |
+      #     echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      - name: Set up dependency caching for faster installs
-        uses: actions/cache@v2
-        if: steps.check_files.outputs.files_exists == 'true'
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-composer-
+      # - name: Set up dependency caching for faster installs
+      #   uses: actions/cache@v2
+      #   if: steps.check_files.outputs.files_exists == 'true'
+      #   with:
+      #     path: ${{ steps.composer-cache.outputs.dir }}
+      #     key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-composer-
 
       - name: Run composer install if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-      - name: Install zip
-        uses: montudor/action-zip@v1
-
-      - name: Zip output
-        run: zip -qq -r ${{ env.ARCHIVE_NAME }} .
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.PACKAGE_NAME }}
-          path: ${{ env.WORKING_DIRECTORY }}/${{ env.ARCHIVE_NAME }}
+          name: php-app
+          path: ${{ env.WORKING_DIRECTORY }}/release.zip
 
   deploy-cakephp5:
     runs-on: ubuntu-latest
@@ -78,27 +72,33 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.PACKAGE_NAME }}
+          name: php-app
 
       - name: Az CLI Login
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Azure App Service Settings
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-cakephp
+          slot-name: 'Production'
+          app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"true","slotSetting":false}]'
+  
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ vars.AZURE_WEBAPP_NAME }}
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-cakephp
           slot-name: 'Production'
-          package: ${{ env.ARCHIVE_NAME }}
+          package: .
 
       - name: Az CLI Logout
         run: az logout
