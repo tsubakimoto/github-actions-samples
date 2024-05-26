@@ -11,6 +11,10 @@ env:
   PHP_VERSION: '8.x'
   WORKING_DIRECTORY: php/simple
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build-php:
     runs-on: ubuntu-latest
