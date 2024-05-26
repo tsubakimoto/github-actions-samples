@@ -73,12 +73,12 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # - name: Azure App Service Settings
-      #   uses: Azure/appservice-settings@v1
-      #   with:
-      #     app-name: ${{ vars.AZURE_WEBAPP_NAME }}-php
-      #     slot-name: 'Production'
-      #     app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"1","slotSetting":false}]'
+      - name: Azure App Service Settings
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-php
+          slot-name: 'Production'
+          app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"1","slotSetting":false}]'
   
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
