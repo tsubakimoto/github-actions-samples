@@ -12,8 +12,8 @@ jobs:
   greet:
     strategy:
       matrix:
-        runners: [ ubuntu-latest, ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-latest-large, macos-latest-xlarge, macos-11, macos-12, macos-12-large, macos-13, macos-13-large, macos-13-xlarge, macos-14, macos-14-large, macos-14-xlarge ]
-    runs-on: ${{ matrix.runner }}
+        os: [ ubuntu-latest, ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-latest-large, macos-latest-xlarge, macos-11, macos-12, macos-12-large, macos-13, macos-13-large, macos-13-xlarge, macos-14, macos-14-large, macos-14-xlarge ]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Send greeting
-        run: echo "Hello ${{ github.event.inputs.name }}"
+        run: echo "Hello ${{ github.event.inputs.name }} on ${{ matrix.os }}"
