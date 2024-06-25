@@ -16,6 +16,13 @@ jobs:
         # os: [ ubuntu-latest, ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-latest-large, macos-latest-xlarge, macos-11, macos-12, macos-12-large, macos-13, macos-13-large, macos-13-xlarge, macos-14, macos-14-large, macos-14-xlarge ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Send greeting
-        run: echo "Hello ${{ github.event.inputs.name }} on ${{ matrix.os }}"
-        continue-on-error: true
+      - name: Display OS info
+        run: |
+          import platform;
+          print(f'Hello ${{ github.event.inputs.name }} on ${{ matrix.os }}')
+          print(f'OS: {platform.system()}')
+          print(f'Release: {platform.release()}')
+          print(f'Version: {platform.version()}')
+          print(f'Machine: {platform.machine()}')
+          print(f'Processor: {platform.processor()}')
+        shell: python
