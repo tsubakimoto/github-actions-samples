@@ -40,4 +40,4 @@ jobs:
           PROCESSOR_INFO=$(python -c "import platform; print(f'Processor: {platform.processor()}')")
           echo "| Runner | OS | Release | Version | Machine | Processor |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
-          echo "| $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $GITHUB_STEP_SUMMARY
+          echo "| ${{ matrix.os }} | $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $GITHUB_STEP_SUMMARY
