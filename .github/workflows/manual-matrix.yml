@@ -22,7 +22,7 @@ jobs:
           python-version: 3.x
           
       - name: Display OS info (Windows)
-        if: startWith(matrix.os, 'windows') == true
+        if: startsWith(matrix.os, 'windows') == true
         run: |
           $OS_INFO = python -c "import platform; print(f'OS: {platform.system()}')"
           $RELEASE_INFO = python -c "import platform; print(f'Release: {platform.release()}')"
@@ -34,7 +34,7 @@ jobs:
           echo "| $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $env:GITHUB_STEP_SUMMARY
           
       - name: Display OS info (macOS, Linux)
-        if: startWith(matrix.os, 'windows') == false
+        if: startsWith(matrix.os, 'windows') == false
         run: |
           OS_INFO=$(python -c "import platform; print(f'OS: {platform.system()}')")
           RELEASE_INFO=$(python -c "import platform; print(f'Release: {platform.release()}')")
