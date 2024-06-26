@@ -29,23 +29,6 @@ jobs:
           VERSION_INFO=$(python -c "import platform; print(f'Version: {platform.version()}')")
           MACHINE_INFO=$(python -c "import platform; print(f'Machine: {platform.machine()}')")
           PROCESSOR_INFO=$(python -c "import platform; print(f'Processor: {platform.processor()}')")
-          echo "os-info=$OS_INFO" >> "$GITHUB_OUTPUT"
-          echo "release-info=$RELEASE_INFO" >> "$GITHUB_OUTPUT"
-          echo "version-info=$VERSION_INFO" >> "$GITHUB_OUTPUT"
-          echo "machine-info=$MACHINE_INFO" >> "$GITHUB_OUTPUT"
-          echo "processor-info=$PROCESSOR_INFO" >> "$GITHUB_OUTPUT"
-          
-      - name: Summary
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            import * as core from '@actions/core' 
-              await core.summary
-              .addHeading('OS Information')
-              .addCodeBlock(generateTestResults(), "js")
-              .addTable([
-                [{data: 'Runner', header: true}, {data: 'OS', header: true}, {data: 'Release', header: true}, {data: 'Version', header: true}, {data: 'Machine', header: true}, {data: 'Processor', header: true}],
-                ['${{ matrix.os }}', '${{ steps.display.outputs.os-info }}', '${{ steps.display.outputs.release-info }}', ${{ steps.display.outputs.version-info }}, ${{ steps.display.outputs.machine-info }}, ${{ steps.display.outputs.processor-info }}]
-              ])
-              .write()
+          echo "| Runner | OS | Release | Version | Machine | Processor |" >> $GITHUB_STEP_SUMMARY
+          echo "| --- | --- | --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
+    		  echo "| $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $GITHUB_STEP_SUMMARY
