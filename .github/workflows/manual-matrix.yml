@@ -9,7 +9,7 @@ on:
         required: true
 
 jobs:
-  greet:
+  runner-info:
     strategy:
       matrix:
         os: [ ubuntu-latest, ubuntu-24.04, ubuntu-22.04, ubuntu-20.04, windows-latest, windows-2022, windows-2019, macos-latest, macos-11, macos-12, macos-13, macos-14 ]
@@ -21,8 +21,20 @@ jobs:
         with:
           python-version: 3.x
           
-      - name: Display OS info
-        id: display
+      - name: Display OS info (Windows)
+        if: startWith(matrix.os, 'windows') == true
+        run: |
+          $OS_INFO = python -c "import platform; print(f'OS: {platform.system()}')"
+          $RELEASE_INFO = python -c "import platform; print(f'Release: {platform.release()}')"
+          $VERSION_INFO = python -c "import platform; print(f'Version: {platform.version()}')"
+          $MACHINE_INFO = python -c "import platform; print(f'Machine: {platform.machine()}')"
+          $PROCESSOR_INFO = python -c "import platform; print(f'Processor: {platform.processor()}')"
+          echo "| Runner | OS | Release | Version | Machine | Processor |" >> $env:GITHUB_STEP_SUMMARY
+          echo "| --- | --- | --- | --- | --- | --- |" >> $env:GITHUB_STEP_SUMMARY
+          echo "| $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $env:GITHUB_STEP_SUMMARY
+          
+      - name: Display OS info (macOS, Linux)
+        if: startWith(matrix.os, 'windows') == false
         run: |
           OS_INFO=$(python -c "import platform; print(f'OS: {platform.system()}')")
           RELEASE_INFO=$(python -c "import platform; print(f'Release: {platform.release()}')")
