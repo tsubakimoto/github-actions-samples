@@ -34,7 +34,7 @@ jobs:
         if: startsWith(matrix.os, 'windows') == false
         run: |
           OS_INFO=$(python -c "import platform; print(platform.system())")
-          RELEASE_INFO=$(python -c "import platform; print(platform.release()}")
+          RELEASE_INFO=$(python -c "import platform; print(platform.release())")
           VERSION_INFO=$(python -c "import platform; print(platform.version())")
           MACHINE_INFO=$(python -c "import platform; print(platform.machine())")
           PROCESSOR_INFO=$(python -c "import platform; print(platform.processor())")
