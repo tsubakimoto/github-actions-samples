@@ -1,6 +1,8 @@
-name: Manual workflow (matrix)
+name: Runner display
 
 on:
+  schedule:
+    - cron: '0 15 * * *'
   workflow_dispatch:
 
 jobs:
