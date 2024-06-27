@@ -26,9 +26,7 @@ jobs:
           $VERSION_INFO=python -c "import platform; print(platform.version())"
           $MACHINE_INFO=python -c "import platform; print(platform.machine())"
           $PROCESSOR_INFO=python -c "import platform; print(platform.processor())"
-          echo "| Runner | OS | Release | Version | Machine | Processor |" >> $env:GITHUB_STEP_SUMMARY
-          echo "| --- | --- | --- | --- | --- | --- |" >> $env:GITHUB_STEP_SUMMARY
-          echo "| ${{ matrix.os }} | $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $env:GITHUB_STEP_SUMMARY
+          echo "| ${{ matrix.os }} | $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $env:GITHUB_STATE
           
       - name: Display OS info (macOS, Linux)
         if: startsWith(matrix.os, 'windows') == false
@@ -38,6 +36,15 @@ jobs:
           VERSION_INFO=$(python -c "import platform; print(platform.version())")
           MACHINE_INFO=$(python -c "import platform; print(platform.machine())")
           PROCESSOR_INFO=$(python -c "import platform; print(platform.processor())")
+          echo "| ${{ matrix.os }} | $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $GITHUB_STATE
+
+  display:
+    runs-on: ubuntu-latest
+    needs: runner-info
+    steps:
+      - name: Display OS info
+        run: |
           echo "| Runner | OS | Release | Version | Machine | Processor |" >> $GITHUB_STEP_SUMMARY
           echo "| --- | --- | --- | --- | --- | --- |" >> $GITHUB_STEP_SUMMARY
-          echo "| ${{ matrix.os }} | $OS_INFO | $RELEASE_INFO | $VERSION_INFO | $MACHINE_INFO | $PROCESSOR_INFO |" >> $GITHUB_STEP_SUMMARY
+          echo $GITHUB_STATE >> GITHUB_STEP_SUMMARY
+          
