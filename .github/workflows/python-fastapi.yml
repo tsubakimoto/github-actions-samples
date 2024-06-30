@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 env:
-  PYTHON_VERSION: '3.10'
   WORKING_DIRECTORY: python/fastapi
 
 permissions:
@@ -18,18 +17,16 @@ permissions:
 jobs:
   build-fastapi:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ${{ env.WORKING_DIRECTORY }}
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Python version
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          python-version: '3.12'
 
       - name: Create and start virtual environment
         run: |
@@ -40,7 +37,7 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
@@ -55,7 +52,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: python-app
           path: .
@@ -75,7 +72,7 @@ jobs:
           app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"1","slotSetting":false}]'
   
       - name: 'Deploy to Azure Web App'
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}-fastapi
