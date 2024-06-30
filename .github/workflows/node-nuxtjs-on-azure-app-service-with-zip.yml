@@ -70,6 +70,13 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+      - name: Azure App Service Settings
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.AZURE_WEBAPP_NAME }}-nuxtjs
+          slot-name: 'Production'
+          app-settings-json: '[{"name":"HOST","value":"0.0.0.0","slotSetting":false},{"name":"NODE_ENV","value":"production","slotSetting":false}]'
+
       - name: 'Run Azure webapp deploy action'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
