@@ -69,7 +69,7 @@ jobs:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}-django
           slot-name: 'Production'
           app-settings-json: '[{"name":"SCM_DO_BUILD_DURING_DEPLOYMENT","value":"1","slotSetting":false}]'
-  
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
