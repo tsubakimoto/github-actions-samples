@@ -24,11 +24,11 @@ jobs:
         working-directory: 'dotnet/net6.0'
         
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         id: setup
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           global-json-file: dotnet/global.json
 
@@ -44,7 +44,7 @@ jobs:
         run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{ env.DOTNET_ROOT }}/myapp ${{ env.SOURCE_CODE_PATH }}
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: .net-app
           path: ${{ env.DOTNET_ROOT }}/myapp
@@ -57,7 +57,7 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: .net-app
 
@@ -70,7 +70,7 @@ jobs:
 
       - name: 'Run Azure webapp deploy action'
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with: 
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}-dotnet6
           slot-name: 'Production'
