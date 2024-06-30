@@ -48,11 +48,11 @@ jobs:
 
       - name: 'Run Azure webapp deploy action'
         id: deploy-to-webapp 
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ vars.AZURE_WEBAPP_NAME }}-express
           slot-name: 'Production'
-          package: ${{ env.WORKING_DIRECTORY }}
+          package: .
 
       - name: Az CLI Logout
         run: az logout
