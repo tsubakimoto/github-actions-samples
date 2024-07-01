@@ -6,9 +6,9 @@ on:
     inputs:
       delete-group:
         description: 'Delete resource group after deployment'
-        required: false
-        default: false
         type: boolean
+        default: true
+        required: true
 
 permissions:
   id-token: write
