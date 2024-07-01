@@ -3,6 +3,12 @@ name: Azure Bicep
 
 on:
   workflow_dispatch:
+    inputs:
+      delete-group:
+        description: 'Delete resource group after deployment'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   id-token: write
@@ -12,9 +18,6 @@ jobs:
   deploy-bicep:
     runs-on: ubuntu-latest
     environment: Production
-    defaults:
-      run:
-        working-directory: 'bicep'
     steps:
       - uses: actions/checkout@v4
 
@@ -37,9 +40,14 @@ jobs:
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ steps.resourceGroup.outputs.group-name }}
-          template: ./main.bicep
+          template: ./bicep/main.bicep
           parameters: 'storagePrefix=yuta storageSKU=Standard_LRS'
           failOnStdErr: false
+
+      - name: Delete resource group
+        if: ${{ github.event.inputs.delete-group }}
+        run: |
+          az group delete --name ${{ steps.resourceGroup.outputs.group-name }} --yes --no-wait
 
       - name: Az CLI Logout
         run: az logout
