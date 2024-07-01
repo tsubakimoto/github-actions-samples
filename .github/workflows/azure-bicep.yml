@@ -35,7 +35,7 @@ jobs:
       - name: Deploy Bicep
         uses: azure/arm-deploy@v2
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ steps.resourceGroup.outputs.group-name }}
           template: ./main.bicep
           parameters: 'storagePrefix=yuta storageSKU=Standard_LRS'
