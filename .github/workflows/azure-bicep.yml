@@ -16,28 +16,31 @@ jobs:
       run:
         working-directory: 'bicep'
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Azure CLI
-      uses: azure/login@v2
-      with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Set up Azure CLI
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: Create resource group
-      id: resourceGroup
-      run: |
-        RESOURCE_GROUP=rg-bicep-from-actions-$RANDOM
-        echo "group-name=$RESOURCE_GROUP" >> $GITHUB_OUTPUT
-        az group create --name $RESOURCE_GROUP --location japaneast
+      - name: Create resource group
+        id: resourceGroup
+        run: |
+          RESOURCE_GROUP=rg-bicep-from-actions-$RANDOM
+          echo "group-name=$RESOURCE_GROUP" >> $GITHUB_OUTPUT
+          az group create --name $RESOURCE_GROUP --location japaneast
 
-    - name: Deploy Bicep
-      uses: azure/arm-deploy@v2
-      with:
-        scope: resource-group
-        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ steps.resourceGroup.outputs.group-name }}
-        template: ./main.bicep
-        parameters: 'storagePrefix=yuta storageSKU=Standard_LRS'
-        failOnStdErr: false
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: resourceGroup
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ steps.resourceGroup.outputs.group-name }}
+          template: ./main.bicep
+          parameters: 'storagePrefix=yuta storageSKU=Standard_LRS'
+          failOnStdErr: false
+
+      - name: Az CLI Logout
+        run: az logout
