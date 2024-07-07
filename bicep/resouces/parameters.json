@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_app_yuta_github_actions_samples_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_php_name": {
+            "value": null
+        },
+        "serverfarms_plan_yuta_github_actions_samples_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_django_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_nuxtjs_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_cakephp_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_dotnet6_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_dotnet7_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_dotnet8_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_express_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_fastapi_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_laravel_name": {
+            "value": null
+        },
+        "sites_app_yuta_github_actions_samples_container_name": {
+            "value": null
+        }
+    }
+}

@@ -1,0 +1,3109 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_app_yuta_github_actions_samples_name": {
+            "defaultValue": "app-yuta-github-actions-samples",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_php_name": {
+            "defaultValue": "app-yuta-github-actions-samples-php",
+            "type": "String"
+        },
+        "serverfarms_plan_yuta_github_actions_samples_name": {
+            "defaultValue": "plan-yuta-github-actions-samples",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_django_name": {
+            "defaultValue": "app-yuta-github-actions-samples-django",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_nuxtjs_name": {
+            "defaultValue": "app-yuta-github-actions-samples-nuxtjs",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_cakephp_name": {
+            "defaultValue": "app-yuta-github-actions-samples-cakephp",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_dotnet6_name": {
+            "defaultValue": "app-yuta-github-actions-samples-dotnet6",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_dotnet7_name": {
+            "defaultValue": "app-yuta-github-actions-samples-dotnet7",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_dotnet8_name": {
+            "defaultValue": "app-yuta-github-actions-samples-dotnet8",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_express_name": {
+            "defaultValue": "app-yuta-github-actions-samples-express",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_fastapi_name": {
+            "defaultValue": "app-yuta-github-actions-samples-fastapi",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_laravel_name": {
+            "defaultValue": "app-yuta-github-actions-samples-laravel",
+            "type": "String"
+        },
+        "sites_app_yuta_github_actions_samples_container_name": {
+            "defaultValue": "app-yuta-github-actions-samples-container",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('serverfarms_plan_yuta_github_actions_samples_name')]",
+            "location": "Japan West",
+            "sku": {
+                "name": "B3",
+                "tier": "Basic",
+                "size": "B3",
+                "family": "B",
+                "capacity": 1
+            },
+            "kind": "linux",
+            "properties": {
+                "perSiteScaling": false,
+                "elasticScaleEnabled": false,
+                "maximumElasticWorkerCount": 1,
+                "isSpot": false,
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0,
+                "zoneRedundant": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "NODE|20-lts",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 1
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_cakephp_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-cakephp.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PHP|8.2",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_container_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux,container",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "DOCKER|ghcr.io/tsubakimoto/github-actions-samples-cakephp5:main",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_django_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-django.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PYTHON|3.12",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_dotnet6_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-dotnet6.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "DOTNETCORE|6.0",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_dotnet7_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-dotnet7.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "DOTNETCORE|7.0",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_dotnet8_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-dotnet8.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "DOTNETCORE|8.0",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_express_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-express.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "NODE|20-lts",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_fastapi_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-fastapi.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PYTHON|3.12",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_laravel_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-laravel.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PHP|8.2",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_nuxtjs_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-nuxtjs.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "NODE|20-lts",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2023-12-01",
+            "name": "[parameters('sites_app_yuta_github_actions_samples_php_name')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]"
+            ],
+            "kind": "app,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "gha-php.ymat.net",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_plan_yuta_github_actions_samples_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "dnsConfiguration": {},
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "PHP|8.2",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": true,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 1
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "vnetBackupRestoreEnabled": false,
+                "customDomainVerificationId": "1F9CB2F8E1740CAAE60CFA443AE1F9848433F450CB581ADA728EF62F7D17447C",
+                "containerSize": 0,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_laravel_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/ftp')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_laravel_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/scm')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "NODE|20-lts",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": true,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$app-yuta-github-actions-samples",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 1,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PHP|8.2",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOCKER|ghcr.io/tsubakimoto/github-actions-samples-cakephp5:main",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$app-yuta-github-actions-samples-container",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.0",
+                "ftpsState": "AllAllowed",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PYTHON|3.12",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOTNETCORE|6.0",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOTNETCORE|7.0",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "DOTNETCORE|8.0",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "NODE|20-lts",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PYTHON|3.12",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_laravel_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PHP|8.2",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "NODE|20-lts",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/web')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "PHP|8.2",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "REDACTED",
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": true,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": true
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "elasticWebAppScaleLimit": 0,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 1,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/23d3357c-0602-4cfb-8ffc-adc778ffa36b')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"19f6c5ffd62e4ff3c24b342f791a38f36cb9766a\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #67 from tsubakimoto/dependabot/pip/python/django/django-4.2.7\\n\\nBump django from 4.2.5 to 4.2.7 in /python/django\"}",
+                "start_time": "2024-04-28T02:30:51.4845575Z",
+                "end_time": "2024-04-28T02:30:55.9627866Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/26fc1ad6-6443-41d9-bd71-b2497f980c89')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"1200ef60d74c5ec5b7daf21232baaa89112b6ba2\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"update django settings.py\"}",
+                "start_time": "2024-05-06T15:13:48.3029861Z",
+                "end_time": "2024-05-06T15:14:45.7962883Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/302f096d-afdd-4c42-aa40-ac9e0ee68b99')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"5447f32e227259d185585f9bea2e44400dc6b0fd\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-06-30T12:57:23.2839483Z",
+                "end_time": "2024-06-30T12:57:49.1817875Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/3747919f-a714-4c4d-9f4a-56ab7e65f9bd')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"79f89958dabada14a34046c6a79024e637731063\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"update fastapi version\"}",
+                "start_time": "2024-04-28T03:03:01.0767953Z",
+                "end_time": "2024-04-28T03:03:02.1785397Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/3a52eaa2-6bed-4281-a246-b535876dc539')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"82956de2b3f62e2cfef596753f8d5a0d363e5489\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-06T14:26:43.8171191Z",
+                "end_time": "2024-05-06T14:26:48.2490802Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/3b452415-ab5c-4d67-87d6-25edba5b0de0')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:09:37.3094765Z",
+                "end_time": "2024-06-30T12:09:41.9456098Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/3cf765d6-67b4-475c-9b4b-2a0af7a8cb74')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"cb2430223a90e46b7c4201a5fd5fb6c120e41ba9\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T05:40:34.5847938Z",
+                "end_time": "2024-05-26T05:40:56.7425181Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/47f42fbd-65ec-41b8-9bf0-6c8ecb17741e')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"5c40a07b66bfb286243e8a78caa23cfb0a8f4b1d\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T08:08:06.8498214Z",
+                "end_time": "2024-05-26T08:08:07.6210899Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/4aa14019-ced0-4235-9bd9-fc103d24ade8')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T13:23:29.4655059Z",
+                "end_time": "2024-06-30T13:36:58.4015266Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/4ac778db-e9b7-4cfa-b031-d9c396627625')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"33ace9463c1a6109b7a78ccd53a4d08c0af1aaba\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #80 from tsubakimoto/express-update\\n\\nExpress update\"}",
+                "start_time": "2024-05-06T00:34:53.2422575Z",
+                "end_time": "2024-05-06T00:34:54.0375875Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/535cdcfa-7055-44f1-8da6-911631130353')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"8bf1157f3475c9541d46493a01b762408bc80824\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"update title\"}",
+                "start_time": "2024-05-06T14:42:16.3756837Z",
+                "end_time": "2024-05-06T14:42:19.311455Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/665442b0-cb89-4e1f-a408-69ab25222a5e')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:53:50.8793716Z",
+                "end_time": "2024-06-30T12:54:52.2032532Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/6bfeac58-7caf-4881-a975-ae463b283bb0')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"2983af176458fd7733720d5010e72b4a54e6a5e1\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"update simple php app\"}",
+                "start_time": "2024-05-26T05:55:45.4876612Z",
+                "end_time": "2024-05-26T05:56:19.3924418Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/71b94f6d-26e1-4ca2-8c02-902ffee7cf59')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"13e9add74ff43f6fe2baeae0aaf0a5d3775d0785\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T05:17:45.4851862Z",
+                "end_time": "2024-05-26T05:18:22.7921605Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/7685e5b4-f13e-48ac-a41a-1ad4084ee902')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:52:01.8516939Z",
+                "end_time": "2024-06-30T13:22:27.6236048Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/77610548-1879-4f5c-a5d4-7256c10cd673')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:49:39.9298989Z",
+                "end_time": "2024-06-30T12:50:43.4869176Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/80612df3-b2af-4b08-a2df-defa50d3aa56')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"b7103aa230f1676f5d96ec245321d2bdd066e063\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #82 from tsubakimoto/update-nuxtjs\\n\\nUpdate nuxtjs\"}",
+                "start_time": "2024-05-06T00:55:53.3248085Z",
+                "end_time": "2024-05-06T00:55:54.0520943Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/93b09983-456c-4c75-9416-6a6c94a4db3a')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:18:33.8432394Z",
+                "end_time": "2024-06-30T12:18:39.1295496Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/9b3222a4-c15a-475d-b001-304ba45a9ba7')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"246a37bd4378ba10731010f73ac86137ebd1d886\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T07:22:15.8134513Z",
+                "end_time": "2024-05-26T07:22:39.3313885Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/9eada5ce-5e5b-4a7e-88df-7452a6506940')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"33ace9463c1a6109b7a78ccd53a4d08c0af1aaba\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #80 from tsubakimoto/express-update\\n\\nExpress update\"}",
+                "start_time": "2024-05-06T00:35:04.63594Z",
+                "end_time": "2024-05-06T00:35:05.5919594Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/a36d7abd-a7ee-48d0-a975-aaa5e7fa4126')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"0820ae3d43b6426bb8cb0f337664f40b593b7668\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2023-09-23T16:24:30.543636Z",
+                "end_time": "2023-09-23T16:24:31.3836842Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/aafc746d-40ec-45df-8469-a6424873c09f')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"33ace9463c1a6109b7a78ccd53a4d08c0af1aaba\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #80 from tsubakimoto/express-update\\n\\nExpress update\"}",
+                "start_time": "2024-05-06T00:37:14.869494Z",
+                "end_time": "2024-05-06T00:37:15.8335474Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/ab5206f4-85ba-461a-af9b-097713216032')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"5447f32e227259d185585f9bea2e44400dc6b0fd\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-06-30T12:36:50.9970363Z",
+                "end_time": "2024-06-30T12:37:16.3738396Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/b71c292906d036bc80006598a672b4a577f362e41695479552122')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "tsubakimoto",
+                "deployer": "GitHub",
+                "message": "{\"type\":\"Deployment\",\"sha\":\"b71c292906d036bc80006598a672b4a577f362e4\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\"}",
+                "start_time": "2023-09-23T14:32:33.2487202Z",
+                "end_time": "2023-09-23T14:32:33.2487202Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/b7706bfa-8e77-459b-b1dd-b7f993c880ca')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"b7103aa230f1676f5d96ec245321d2bdd066e063\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"Merge pull request #82 from tsubakimoto/update-nuxtjs\\n\\nUpdate nuxtjs\"}",
+                "start_time": "2024-05-06T02:12:06.9358963Z",
+                "end_time": "2024-05-06T02:12:08.2634463Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/cda228f5-15fe-4212-a7af-6bdeab1248d6')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "OneDeploy",
+                "message": "OneDeploy",
+                "start_time": "2024-06-30T12:20:33.2398252Z",
+                "end_time": "2024-06-30T12:20:43.5804302Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/cda55d91-c437-440e-a775-79f1235ac988')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"2cf3908f0241bb0c1e2805f3e37efc1459334778\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-06T14:57:05.7732371Z",
+                "end_time": "2024-05-06T14:58:10.8306907Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/d119d853-213a-4fc6-83d6-0415ad5963d9')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"13e9add74ff43f6fe2baeae0aaf0a5d3775d0785\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T05:07:54.8102491Z",
+                "end_time": "2024-05-26T05:08:18.575919Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/d162f3bb-9abc-44bf-a27c-d906e58373ef')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"5447f32e227259d185585f9bea2e44400dc6b0fd\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-06-30T12:45:45.0078218Z",
+                "end_time": "2024-06-30T12:46:04.7901191Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/d3f59748-f717-4d74-8c83-b2fa363ce612')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"823af6ea3e26df5508fab08462e7adace1d68aa4\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T04:46:19.4810782Z",
+                "end_time": "2024-05-26T05:15:46.7448631Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/d5559cfb87b1301273e3a30d125a8fc8bc2d63511695481383079')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author": "tsubakimoto",
+                "deployer": "GitHub",
+                "message": "{\"type\":\"Deployment\",\"sha\":\"d5559cfb87b1301273e3a30d125a8fc8bc2d6351\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\"}",
+                "start_time": "2023-09-23T15:03:04.2323125Z",
+                "end_time": "2023-09-23T15:03:04.2323125Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/dfa29d63-6819-4699-9b1d-8116b68cefcf')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"0820ae3d43b6426bb8cb0f337664f40b593b7668\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2023-10-21T13:48:14.3456055Z",
+                "end_time": "2023-10-21T13:48:16.1334842Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/e25cfead-35f5-4832-a9fd-24d479c82f1c')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"8cda5cb6ae994a9655b10fd1a4b7cb94303fadda\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-06T14:33:21.7959651Z",
+                "end_time": "2024-05-06T14:33:48.0517221Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/e3766374-45cb-49b1-8308-3d83b2bdc9c7')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"c99f5cced17961285c2a9348c2457bac00bed19d\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T05:30:22.9099671Z",
+                "end_time": "2024-05-26T05:30:50.8094938Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/e5dc59ab-1d29-4e98-b857-addfb79b6ce3')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"5447f32e227259d185585f9bea2e44400dc6b0fd\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-06-30T12:41:29.9645269Z",
+                "end_time": "2024-06-30T12:41:52.7740821Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/e7e6f35c-3f60-495a-9622-45292309ec05')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"8cda5cb6ae994a9655b10fd1a4b7cb94303fadda\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-06T14:32:46.931816Z",
+                "end_time": "2024-05-06T14:33:07.2871939Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/e92f5fe7-b0f1-4f76-9b2d-41d94ee737a4')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"13e9add74ff43f6fe2baeae0aaf0a5d3775d0785\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T05:24:24.5113222Z",
+                "end_time": "2024-05-26T05:54:34.0968921Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/fa514925-54cd-4ce7-be47-19512347966b')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "GITHUB_ZIP_DEPLOY",
+                "message": "{\"type\":\"deployment\",\"sha\":\"3452e344c6d4f37c1d7eba87e3a927287d367c7c\",\"repoName\":\"tsubakimoto/github-actions-samples\",\"actor\":\"tsubakimoto\",\"slotName\":\"Production\",\"commitMessage\":\"\"}",
+                "start_time": "2024-05-26T04:40:14.8746283Z",
+                "end_time": "2024-05-26T04:40:15.627712Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_name'), '/', parameters('sites_app_yuta_github_actions_samples_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/', parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-cakephp",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_container_name'), '/', parameters('sites_app_yuta_github_actions_samples_container_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_container_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-container",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/', parameters('sites_app_yuta_github_actions_samples_django_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-django",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet6",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet7",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet8",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/', parameters('sites_app_yuta_github_actions_samples_express_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-express",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/', parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-fastapi",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '/', parameters('sites_app_yuta_github_actions_samples_laravel_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_laravel_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-laravel",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-nuxtjs",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/', parameters('sites_app_yuta_github_actions_samples_php_name'), '.azurewebsites.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-php",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_cakephp_name'), '/gha-cakephp.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_cakephp_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-cakephp",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_django_name'), '/gha-django.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_django_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-django",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet6_name'), '/gha-dotnet6.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet6_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet6",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet7_name'), '/gha-dotnet7.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet7_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet7",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_dotnet8_name'), '/gha-dotnet8.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_dotnet8_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-dotnet8",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_express_name'), '/gha-express.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_express_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-express",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_fastapi_name'), '/gha-fastapi.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_fastapi_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-fastapi",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_laravel_name'), '/gha-laravel.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_laravel_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-laravel",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'), '/gha-nuxtjs.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_nuxtjs_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-nuxtjs",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2023-12-01",
+            "name": "[concat(parameters('sites_app_yuta_github_actions_samples_php_name'), '/gha-php.ymat.net')]",
+            "location": "Japan West",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_app_yuta_github_actions_samples_php_name'))]"
+            ],
+            "properties": {
+                "siteName": "app-yuta-github-actions-samples-php",
+                "hostNameType": "Verified",
+                "sslState": "SniEnabled",
+                "thumbprint": "105B640C6C7CA8FFD6C3C5754C7CED43A9C343A4"
+            }
+        }
+    ]
+}
