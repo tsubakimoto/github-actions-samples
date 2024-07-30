@@ -12,11 +12,16 @@ env:
 jobs:
   github-artifact-attestations:
     runs-on: ubuntu-latest
-    
+
+    permissions:
+      id-token: write
+      contents: read
+      attestations: write
+
     defaults:
       run:
         working-directory: 'dotnet/net8.0'
-        
+
     steps:
       - uses: actions/checkout@v4
 
