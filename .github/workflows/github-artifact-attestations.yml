@@ -5,10 +5,6 @@ name: GitHub Artifact Attestations
 on:
   workflow_dispatch:
 
-env:
-  SOURCE_CODE_PATH: 'razorpageapp/razorpageapp.csproj'
-  BUILD_CONFIGURATION: Release
-
 jobs:
   github-artifact-attestations:
     runs-on: ubuntu-latest
@@ -30,20 +26,8 @@ jobs:
         with:
           global-json-file: dotnet/global.json
 
-      - name: Restore dependencies
-        run: dotnet restore ${{ env.SOURCE_CODE_PATH }}
-
-      - name: Build
-        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
-
       - name: Publish
-        run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{env.DOTNET_ROOT}}/myapp ${{ env.SOURCE_CODE_PATH }}
-
-      # - name: Upload artifact for deployment job
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: .net-app
-      #     path: ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish --configuration Release --output ${{env.DOTNET_ROOT}}/myapp razorpageapp/razorpageapp.csproj
 
       - name: Artifact Attestation
         uses: actions/attest-build-provenance@v1
