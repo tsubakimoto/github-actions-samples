@@ -1,0 +1,46 @@
+# https://github.blog/security/supply-chain-security/configure-github-artifact-attestations-for-secure-cloud-native-delivery/
+# https://github.blog/changelog/2024-06-25-artifact-attestations-is-generally-available/
+name: GitHub Artifact Attestations
+
+on:
+  workflow_dispatch:
+
+env:
+  SOURCE_CODE_PATH: 'razorpageapp/razorpageapp.csproj'
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  github-artifact-attestations:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: 'dotnet/net8.0'
+        
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: dotnet/global.json
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOURCE_CODE_PATH }}
+
+      - name: Build
+        run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} ${{ env.SOURCE_CODE_PATH }}
+
+      - name: Publish
+        run: dotnet publish --no-build --configuration ${{ env.BUILD_CONFIGURATION }} --output ${{env.DOTNET_ROOT}}/myapp ${{ env.SOURCE_CODE_PATH }}
+
+      # - name: Upload artifact for deployment job
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: .net-app
+      #     path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Artifact Attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: ${{env.DOTNET_ROOT}}/myapp
