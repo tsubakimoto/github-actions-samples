@@ -5,7 +5,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  WORKING_DIRECTORY: nodejs/express
   IMAGE_NAME: ${{ github.repository }}-express
 
 jobs:
@@ -13,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.WORKING_DIRECTORY }}
+        working-directory: nodejs/express
     permissions:
       contents: read
       packages: write
@@ -49,6 +48,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v6
         with:
+          context: nodejs/express
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
