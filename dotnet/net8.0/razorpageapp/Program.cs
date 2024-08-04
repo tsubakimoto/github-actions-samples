@@ -23,4 +23,11 @@ app.UseHttpsRedirection(            );
 
                 app.MapRazorPages();
 
+
+app.MapGet("/delay", () =>
+{
+    System.Threading.Tasks.Task.Delay(3000).Wait();
+    return "This is a delayed response";
+});
+
                     app.Run();
