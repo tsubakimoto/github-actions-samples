@@ -13,4 +13,8 @@
     <PackageReference Include="Aspire.Hosting.AppHost" Version="8.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\razorpageapp\razorpageapp.csproj" />
+  </ItemGroup>
+
 </Project>
