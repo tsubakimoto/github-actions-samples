@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+# 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net6.0", "net6.0", "{96F8E184-0AD2-4CC8-8B56-FC064C73E115}"
@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8.0", "net8.0", "{82204A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "consoleapp", "net8.0\consoleapp\consoleapp.csproj", "{73EC3307-ECBB-4F89-9307-FA59F73C454A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "razorpageapp", "net8.0\razorpageapp\razorpageapp.csproj", "{B7DCC524-D43F-4EE4-8C76-B29F5F595333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "razorpageapp", "net8.0\razorpageapp\razorpageapp.csproj", "{B7DCC524-D43F-4EE4-8C76-B29F5F595333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "net8.0\ServiceDefaults\ServiceDefaults.csproj", "{0C315506-9DFE-4099-B55C-60010E5B21DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7DCC524-D43F-4EE4-8C76-B29F5F595333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C315506-9DFE-4099-B55C-60010E5B21DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C315506-9DFE-4099-B55C-60010E5B21DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C315506-9DFE-4099-B55C-60010E5B21DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C315506-9DFE-4099-B55C-60010E5B21DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{1D2C0B5D-FCFD-4872-B38D-1661C8455F62} = {C6100442-FD97-4ABB-87CD-451375F8E9F2}
 		{73EC3307-ECBB-4F89-9307-FA59F73C454A} = {82204ABB-A7FD-4904-BAFE-65834AFFFA3E}
 		{B7DCC524-D43F-4EE4-8C76-B29F5F595333} = {82204ABB-A7FD-4904-BAFE-65834AFFFA3E}
+		{0C315506-9DFE-4099-B55C-60010E5B21DA} = {82204ABB-A7FD-4904-BAFE-65834AFFFA3E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8058C698-71A0-4FDF-AB5F-EDA80872CE2F}
