@@ -4,8 +4,9 @@ var builder = WebApplication.CreateBuilder( args    );
 builder.    Services.   AddRazorPages(  );
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.AddServiceProfiler();
+builder.AddServiceDefaults();
 
-    var app = builder.Build();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())   {
@@ -29,5 +30,7 @@ app.MapGet("/delay", () =>
     System.Threading.Tasks.Task.Delay(3000).Wait();
     return "This is a delayed response";
 });
+
+app.MapDefaultEndpoints();
 
                     app.Run();
