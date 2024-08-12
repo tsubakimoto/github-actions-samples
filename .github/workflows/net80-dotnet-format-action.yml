@@ -2,11 +2,11 @@
 name: .NET 8.0 tsubakimoto/action-dotnet-format
 
 on:
-  # pull_request:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - 'dotnet/net8.0/**'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'dotnet/net8.0/**'
   workflow_dispatch:
 
 permissions:
@@ -24,7 +24,7 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Format
         id: format
-        uses: tsubakimoto/action-dotnet-format@v0.2.0
+        uses: tsubakimoto/action-dotnet-format@v1
         with:
           base-branch: '${{ github.ref_name }}'
           project-path: 'dotnet/net8.0/consoleapp/consoleapp.csproj'
