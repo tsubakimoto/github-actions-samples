@@ -1,0 +1,38 @@
+# https://github.com/marketplace/actions/dotnet-format-on-pull-request
+name: .NET 8.0 tsubakimoto/action-dotnet-format
+
+on:
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'dotnet/net8.0/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  run-dotnet-format:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'dotnet/net8.0'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Format
+        id: format
+        uses: tsubakimoto/action-dotnet-format@v1.0.0
+        with:
+          base-branch: ${{ github.head_ref }}
+          project-path: 'consoleapp/consoleapp.csproj'
+      - name: Output
+        run: |
+          echo "head-branch: ${{ steps.format.outputs.head-branch }}"
+          echo "changed: ${{ steps.format.outputs.changed }}"
+          echo "pull-request-url: ${{ steps.format.outputs.pull-request-url }}"
