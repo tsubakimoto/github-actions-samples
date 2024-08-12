@@ -14,11 +14,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  run-dotnet-format:
+  run-action-dotnet-format:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'dotnet/net8.0'
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET SDK
@@ -30,7 +27,7 @@ jobs:
         uses: tsubakimoto/action-dotnet-format@v0.2.0
         with:
           base-branch: ${{ github.head_ref }}
-          project-path: 'consoleapp/consoleapp.csproj'
+          project-path: 'dotnet/net8.0/consoleapp/consoleapp.csproj'
           verbosity: 'diag'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Output
