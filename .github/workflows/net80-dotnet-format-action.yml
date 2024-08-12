@@ -27,10 +27,12 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Format
         id: format
-        uses: tsubakimoto/action-dotnet-format@v1.0.0
+        uses: tsubakimoto/action-dotnet-format@v0
         with:
           base-branch: ${{ github.head_ref }}
           project-path: 'consoleapp/consoleapp.csproj'
+          verbosity: 'diag'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Output
         run: |
           echo "head-branch: ${{ steps.format.outputs.head-branch }}"
