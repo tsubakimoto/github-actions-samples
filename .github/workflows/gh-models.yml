@@ -2,6 +2,12 @@ name: GitHub Models from Actions
 
 on:
   workflow_dispatch:
+    inputs:
+      user-message:
+        type: text
+        required: false
+        description: User message
+        default: What is the capital of Japan?
 
 jobs:
   call-rest-api:
@@ -21,7 +27,7 @@ jobs:
                   },
                   {
                       "role": "user",
-                      "content": "What is the capital of Japan?"
+                      "content": "${{ inputs.user-message }}"
                   }
               ],
               "temperature": 0.5,
