@@ -1,0 +1,11 @@
+name: Call REST API from Actions
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-rest-api:
+    name: Call REST API
+    runs-on: ubuntu-latest
+    steps:
+      - run: curn -X GET -I https://petstore.swagger.io/v2/pet/findByStatus?status=available
