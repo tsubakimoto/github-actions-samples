@@ -1,4 +1,4 @@
-name: Call GitHub Models from Actions
+name: GitHub Models from Actions
 
 on:
   workflow_dispatch:
