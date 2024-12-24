@@ -14,4 +14,6 @@ jobs:
       #     ref: main
 
       - name: Checkout my public repository from GitLab using shell
-        run: git clone https://gitlab.com/tsubakimoto/python-sample-vscode-flask-tutorial.git
+        run: |
+          git clone https://gitlab.com/tsubakimoto/python-sample-vscode-flask-tutorial.git
+          ls -al python-sample-vscode-flask-tutorial
