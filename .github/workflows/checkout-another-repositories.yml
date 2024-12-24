@@ -7,11 +7,11 @@ jobs:
   checkout-from-gitlab:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout my public repository from GitLab
-        uses: actions/checkout@v4
-        with:
-          repository: https://gitlab.com/tsubakimoto/python-sample-vscode-flask-tutorial.git
-          ref: main
+      # - name: Checkout my public repository from GitLab
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: https://gitlab.com/tsubakimoto/python-sample-vscode-flask-tutorial.git
+      #     ref: main
 
       - name: Checkout my public repository from GitLab using shell
         run: git clone https://gitlab.com/tsubakimoto/python-sample-vscode-flask-tutorial.git
