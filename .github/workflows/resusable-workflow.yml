@@ -1,0 +1,12 @@
+name: Reusable Workflow (call context)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-context-workflow:
+    uses: tsubakimoto/github-actions-samples/.github/workflows/github-actions-context-dump.yml@main
+    with:
+      config-path: README.md
+    secrets:
+      envPAT: ${{ secrets.token }}
