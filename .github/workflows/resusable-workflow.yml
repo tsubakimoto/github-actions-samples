@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-context-workflow:
-    uses: .github/workflows/github-actions-context-dump.yml@main
+    uses: .github/workflows/github-actions-context-dump.yml
     with:
       config-path: README.md
     secrets:
