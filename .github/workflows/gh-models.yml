@@ -33,5 +33,5 @@ jobs:
                 "temperature": 0.5,
                 "top_p": 1.0,
                 "max_tokens": 1000,
-                "model": "gpt-4o-mini"
+                "model": "o3-mini"
             }' | jq -c '.choices[0].message.content' >> $GITHUB_STEP_SUMMARY
