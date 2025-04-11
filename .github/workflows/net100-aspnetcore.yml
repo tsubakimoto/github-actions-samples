@@ -50,6 +50,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy-aspnetcore10:
+    if: false
     runs-on: ubuntu-latest
     needs: build-aspnetcore10
     environment:
