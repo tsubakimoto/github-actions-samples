@@ -11,12 +11,11 @@ on:
         required: true
         default: 'What can you do help?'
 
-permissions:
-  contents: read
-  models: read
-
 jobs:
   send-prompt:
+    permissions:
+      contents: read
+      models: read
     runs-on: ubuntu-latest
     steps:
       - name: Test Local Action
@@ -25,7 +24,6 @@ jobs:
         with:
           prompt: '${{ github.event.inputs.prompt }}'
 
-      - name: Use Response File
-        run: |
-          echo "Response saved to: ${{ steps.inference.outputs.response-file }}"
-          cat "${{ steps.inference.outputs.response-file }}"
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.inference.outputs.response }}" >> $GITHUB_STEP_SUMMARY
