@@ -10,11 +10,11 @@ on:
         description: 'The prompt to send to the model'
         required: true
         default: 'What can you do help?'
-      model:
-        type: text
-        description: 'The model to use for inference. Must be available in the GitHub Models catalog'
-        required: true
-        default: 'gpt-4o'
+      # model:
+      #   type: text
+      #   description: 'The model to use for inference. Must be available in the GitHub Models catalog'
+      #   required: true
+      #   default: 'gpt-4o'
 
 jobs:
   send-prompt:
@@ -28,7 +28,7 @@ jobs:
         uses: actions/ai-inference@v1
         with:
           prompt: '${{ github.event.inputs.prompt }}'
-          model: '${{ github.event.inputs.model }}'
+          # model: '${{ github.event.inputs.model }}'
 
       - name: Print Output
         id: output
