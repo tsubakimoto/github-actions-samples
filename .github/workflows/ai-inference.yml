@@ -1,0 +1,31 @@
+# https://github.com/actions/ai-inference
+
+name: AI Inference
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        type: text
+        description: 'The prompt to send to the model'
+        required: true
+        default: 'What can you do help?'
+
+permissions:
+  contents: read
+  models: read
+
+jobs:
+  send-prompt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Local Action
+        id: inference
+        uses: actions/ai-inference@v1
+        with:
+          prompt: '${{ github.event.inputs.prompt }}'
+
+      - name: Use Response File
+        run: |
+          echo "Response saved to: ${{ steps.inference.outputs.response-file }}"
+          cat "${{ steps.inference.outputs.response-file }}"
