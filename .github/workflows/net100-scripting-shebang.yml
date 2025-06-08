@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-csharp-script:
+  run-csharp-script-shebang:
     runs-on: ubuntu-latest
     defaults:
       run:
