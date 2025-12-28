@@ -15,5 +15,5 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 #v6.0.1
       - name: Echo
         run: echo "Hello world"
-      - name: Output current date/time (JST) to GITHUB_SUMMARY
-        run: echo "## Current Datetime (JST): $(TZ='Asia/Tokyo' date)" >> $GITHUB_SUMMARY
+      - name: Output current date/time to GITHUB_STEP_SUMMARY
+        run: echo "## Current Datetime: $(date -u)" >> $GITHUB_STEP_SUMMARY
