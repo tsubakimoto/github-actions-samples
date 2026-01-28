@@ -30,6 +30,6 @@ jobs:
         run: dotnet publish --configuration Release --output ${{env.DOTNET_ROOT}}/myapp razorpageapp/razorpageapp.csproj
 
       - name: Artifact Attestation
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v3
         with:
           subject-path: ${{env.DOTNET_ROOT}}/myapp
