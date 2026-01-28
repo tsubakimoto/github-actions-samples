@@ -1,12 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "dotnet-sdk"
-    directory: "/dotnet"
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "weekly"
-      day: "wednesday"
-    ignore:
-      - dependency-name: "*"
-        update-types: 
-          - "version-update:semver-major"
-          - "version-update:semver-minor"
