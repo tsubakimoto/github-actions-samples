@@ -3,7 +3,8 @@ name: Runner display
 
 on:
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '0 0 * * *'
+      timezone: "Asia/Tokyo"
   workflow_dispatch:
 
 jobs:
