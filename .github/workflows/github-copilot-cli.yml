@@ -1,0 +1,36 @@
+# GitHub Copilot CLI
+# https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/copilot-cli/automate-copilot-cli/automate-with-actions#authenticate
+
+name: GitHub Copilot CLI
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  summarize-workflows-by-github-copilot-cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js environment
+        uses: actions/setup-node@v4
+
+      - name: Install Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Run Copilot CLI
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_CLI_PAT }}
+        run: |
+          copilot \
+            --model "gpt-4.1" \
+            --prompt "Please organize the workflow files in this repository by type and list them in summary.md." \
+            --allow-tool='shell(git:*)' \
+            --allow-tool=write \
+            --no-ask-user
+          cat summary.md >> "$GITHUB_STEP_SUMMARY"
