@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         ref: main
-    - uses: martincostello/update-dotnet-sdk@v3
+    - uses: martincostello/update-dotnet-sdk@v5
       with:
         quality: 'daily'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
