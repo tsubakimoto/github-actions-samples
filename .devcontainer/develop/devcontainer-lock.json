@@ -1,0 +1,39 @@
+{
+  "features": {
+    "ghcr.io/azure/azure-dev/azd:0": {
+      "version": "0.2.0",
+      "resolved": "ghcr.io/azure/azure-dev/azd@sha256:01bbec064fcb34f7c8730b3e3c2cc210699e213419664524982268b2910c4f73",
+      "integrity": "sha256:01bbec064fcb34f7c8730b3e3c2cc210699e213419664524982268b2910c4f73"
+    },
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "1.2.9",
+      "resolved": "ghcr.io/devcontainers/features/azure-cli@sha256:4549175fbfd3475d1d62e82f6e5425d03954a6ae06027b2515b0ba41a8206417",
+      "integrity": "sha256:4549175fbfd3475d1d62e82f6e5425d03954a6ae06027b2515b0ba41a8206417"
+    },
+    "ghcr.io/devcontainers/features/copilot-cli:1": {
+      "version": "1.1.2",
+      "resolved": "ghcr.io/devcontainers/features/copilot-cli@sha256:757c6c2899dc902c44a9f6164c1f7392832ced13c6bb632d8d60a880f2e92456",
+      "integrity": "sha256:757c6c2899dc902c44a9f6164c1f7392832ced13c6bb632d8d60a880f2e92456"
+    },
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "2.5.0",
+      "resolved": "ghcr.io/devcontainers/features/dotnet@sha256:0fc16547ed4db6d7ff2a9f5981d2b93eb314e568affb9958029ad794f1f9a093",
+      "integrity": "sha256:0fc16547ed4db6d7ff2a9f5981d2b93eb314e568affb9958029ad794f1f9a093"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "1.1.0",
+      "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671",
+      "integrity": "sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671"
+    },
+    "ghcr.io/devcontainers/features/node:2": {
+      "version": "2.0.0",
+      "resolved": "ghcr.io/devcontainers/features/node@sha256:fedd4c11f7adfb64283b578dddc7da906728daa25fa293351c9d913231acf12f",
+      "integrity": "sha256:fedd4c11f7adfb64283b578dddc7da906728daa25fa293351c9d913231acf12f"
+    },
+    "ghcr.io/devcontainers/features/powershell:2": {
+      "version": "2.0.2",
+      "resolved": "ghcr.io/devcontainers/features/powershell@sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61",
+      "integrity": "sha256:82ea3880c5706ac3963f1b5e940a7f5871835393a5472f80008148b995d58d61"
+    }
+  }
+}
