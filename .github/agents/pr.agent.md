@@ -1,7 +1,7 @@
 ---
 name: PR Agent
 description: 指定されたイシューと実装に対するプルリクエストを作成します。
-tools: [execute, read, search, web, todo, ms-vscode.vscode-websearchforcopilot/websearch]
+tools: [execute, read, search, web, todo]
 model: GPT-5 mini (copilot)
 ---
 
