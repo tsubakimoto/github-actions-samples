@@ -12,6 +12,9 @@ param resourceGroupName string = 'rg-${baseName}'
 @description('App Service Plan SKU name')
 param appServicePlanSkuName string = 'B1'
 
+@description('App Service Plan SKU tier')
+param appServicePlanSkuTier string = 'Basic'
+
 var apps = [
   { suffix: 'dotnet6', linuxFxVersion: 'DOTNETCORE|6.0' }
   { suffix: 'dotnet7', linuxFxVersion: 'DOTNETCORE|7.0' }
@@ -42,6 +45,7 @@ module appServicePlan 'modules/appServicePlan.bicep' = {
     name: 'plan-${baseName}'
     location: location
     skuName: appServicePlanSkuName
+    skuTier: appServicePlanSkuTier
   }
   dependsOn: [
     rg
