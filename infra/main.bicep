@@ -15,6 +15,9 @@ param appServicePlanSkuName string = 'B1'
 @description('App Service Plan SKU tier')
 param appServicePlanSkuTier string = 'Basic'
 
+@description('Log Analytics workspace daily ingestion cap in GB')
+param logAnalyticsDailyQuotaGb int = 1
+
 var apps = [
   { suffix: 'dotnet6', linuxFxVersion: 'DOTNETCORE|6.0' }
   { suffix: 'dotnet7', linuxFxVersion: 'DOTNETCORE|7.0' }
@@ -52,6 +55,29 @@ module appServicePlan 'modules/appServicePlan.bicep' = {
   ]
 }
 
+module logAnalytics 'modules/logAnalytics.bicep' = {
+  name: 'logAnalytics'
+  scope: resourceGroup(resourceGroupName)
+  params: {
+    name: 'log-${baseName}'
+    location: location
+    dailyQuotaGb: logAnalyticsDailyQuotaGb
+  }
+  dependsOn: [
+    rg
+  ]
+}
+
+module appInsights 'modules/appInsights.bicep' = {
+  name: 'appInsights'
+  scope: resourceGroup(resourceGroupName)
+  params: {
+    name: 'appi-${baseName}'
+    location: location
+    workspaceId: logAnalytics.outputs.id
+  }
+}
+
 module webApps 'modules/webApp.bicep' = [for app in apps: {
   name: 'webApp-${app.suffix}'
   scope: resourceGroup(resourceGroupName)
@@ -60,5 +86,6 @@ module webApps 'modules/webApp.bicep' = [for app in apps: {
     location: location
     serverFarmId: appServicePlan.outputs.id
     linuxFxVersion: app.linuxFxVersion
+    appInsightsConnectionString: appInsights.outputs.connectionString
   }
 }]

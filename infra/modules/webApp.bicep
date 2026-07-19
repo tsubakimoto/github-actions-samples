@@ -10,6 +10,9 @@ param serverFarmId string
 @description('Linux runtime stack, e.g. DOTNETCORE|8.0, NODE|20-lts, PHP|8.2, PYTHON|3.12')
 param linuxFxVersion string
 
+@description('Application Insights connection string')
+param appInsightsConnectionString string
+
 resource webApp 'Microsoft.Web/sites@2024-11-01' = {
   name: name
   location: location
@@ -20,6 +23,12 @@ resource webApp 'Microsoft.Web/sites@2024-11-01' = {
     siteConfig: {
       linuxFxVersion: linuxFxVersion
       alwaysOn: true
+      appSettings: [
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appInsightsConnectionString
+        }
+      ]
     }
   }
 }

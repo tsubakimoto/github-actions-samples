@@ -5,3 +5,4 @@ param baseName = 'yuta-gha-samples'
 param resourceGroupName = 'rg-${baseName}'
 param appServicePlanSkuName = 'B1'
 param appServicePlanSkuTier = 'Basic'
+param logAnalyticsDailyQuotaGb = 1
