@@ -3,6 +3,12 @@ GitHub Actionsを色々試すリポジトリ
 
 [![GitHub Super-Linter](https://github.com/tsubakimoto/github-actions-samples/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
+## Azureインフラ
+
+```sh
+az deployment sub create --location japaneast --template-file infra/main.bicep --parameters infra/main.bicepparam
+```
+
 ## .NET
 
 ### [ASP.NET Core 6](dotnet/net6.0/razorpageapp)

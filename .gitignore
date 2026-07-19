@@ -1,3 +1,4 @@
 act/payload.json
 act/.secrets
 .mono/
+infra/exported/
