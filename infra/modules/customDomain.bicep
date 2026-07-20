@@ -7,8 +7,8 @@ param appSuffix string
 @description('Custom domain name, e.g. example.com')
 param customDomainName string
 
-@description('Name of the existing DNS zone for customDomainName')
-param dnsZoneName string
+@description('Resource ID of the existing DNS zone for customDomainName')
+param dnsZoneId string
 
 @description('Name of the existing Key Vault holding the TLS certificate')
 param keyVaultName string
@@ -27,9 +27,10 @@ param customDomainVerificationId string
 
 var fqdn = '${appSuffix}.${customDomainName}'
 
-resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' existing = {
-  name: dnsZoneName
-}
+var dnsZoneIdSegments = split(dnsZoneId, '/')
+var dnsZoneSubscriptionId = dnsZoneIdSegments[2]
+var dnsZoneResourceGroupName = dnsZoneIdSegments[4]
+var dnsZoneName = last(dnsZoneIdSegments)
 
 resource keyVault 'Microsoft.KeyVault/vaults@2024-11-01' existing = {
   name: keyVaultName
@@ -39,29 +40,14 @@ resource webApp 'Microsoft.Web/sites@2024-11-01' existing = {
   name: webAppName
 }
 
-resource cnameRecord 'Microsoft.Network/dnsZones/CNAME@2018-05-01' = {
-  parent: dnsZone
-  name: appSuffix
-  properties: {
-    TTL: 3600
-    CNAMERecord: {
-      cname: '${webAppName}.azurewebsites.net'
-    }
-  }
-}
-
-resource txtRecord 'Microsoft.Network/dnsZones/TXT@2018-05-01' = {
-  parent: dnsZone
-  name: 'asuid.${appSuffix}'
-  properties: {
-    TTL: 3600
-    TXTRecords: [
-      {
-        value: [
-          customDomainVerificationId
-        ]
-      }
-    ]
+module dnsRecords 'dnsRecords.bicep' = {
+  name: 'dnsRecords-${appSuffix}'
+  scope: resourceGroup(dnsZoneSubscriptionId, dnsZoneResourceGroupName)
+  params: {
+    dnsZoneName: dnsZoneName
+    appSuffix: appSuffix
+    cname: '${webAppName}.azurewebsites.net'
+    customDomainVerificationId: customDomainVerificationId
   }
 }
 
@@ -75,8 +61,7 @@ resource certificate 'Microsoft.Web/certificates@2024-11-01' = {
     serverFarmId: serverFarmId
   }
   dependsOn: [
-    cnameRecord
-    txtRecord
+    dnsRecords
   ]
 }
 
@@ -89,7 +74,6 @@ resource hostNameBinding 'Microsoft.Web/sites/hostNameBindings@2024-11-01' = {
     hostNameType: 'Verified'
   }
   dependsOn: [
-    cnameRecord
-    txtRecord
+    dnsRecords
   ]
 }

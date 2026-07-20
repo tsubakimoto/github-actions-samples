@@ -15,8 +15,8 @@ param appServicePlanSkuTier string = 'Basic'
 @description('Log Analytics workspace daily ingestion cap in GB')
 param logAnalyticsDailyQuotaGb int = 1
 
-@description('Name of the existing DNS zone for custom domains. Leave empty to skip custom domain configuration.')
-param customDomainZoneName string = ''
+@description('Resource ID of the existing DNS zone for custom domains. Leave empty to skip custom domain configuration.')
+param customDomainZoneId string = ''
 
 @description('Custom domain name; each app becomes {suffix}.{customDomainName}')
 param customDomainName string = ''
@@ -35,7 +35,7 @@ var appServicePlanName = '${abbrs.webServerFarms}${baseName}-${uniqueSuffix}'
 var logAnalyticsName = '${abbrs.operationalInsightsWorkspaces}${baseName}-${uniqueSuffix}'
 var appInsightsName = '${abbrs.insightsComponents}${baseName}-${uniqueSuffix}'
 
-var useCustomDomain = !empty(customDomainZoneName) && !empty(customDomainName) && !empty(keyVaultName) && !empty(keyVaultCertificateName)
+var useCustomDomain = !empty(customDomainZoneId) && !empty(customDomainName) && !empty(keyVaultName) && !empty(keyVaultCertificateName)
 
 var apps = [
   { suffix: 'dotnet6', linuxFxVersion: 'DOTNETCORE|6.0' }
@@ -116,7 +116,7 @@ module customDomains 'modules/customDomain.bicep' = [for (app, i) in apps: if (u
     location: location
     appSuffix: app.suffix
     customDomainName: customDomainName
-    dnsZoneName: customDomainZoneName
+    dnsZoneId: customDomainZoneId
     keyVaultName: keyVaultName
     keyVaultCertificateName: keyVaultCertificateName
     webAppName: webApps[i].outputs.name
