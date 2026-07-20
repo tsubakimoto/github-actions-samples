@@ -2,3 +2,4 @@ act/payload.json
 act/.secrets
 .mono/
 infra/exported/
+infra/main.bicepparam
