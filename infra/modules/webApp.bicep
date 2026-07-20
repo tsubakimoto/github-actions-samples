@@ -36,3 +36,4 @@ resource webApp 'Microsoft.Web/sites@2024-11-01' = {
 output id string = webApp.id
 output name string = webApp.name
 output defaultHostName string = webApp.properties.defaultHostName
+output customDomainVerificationId string = webApp.properties.customDomainVerificationId

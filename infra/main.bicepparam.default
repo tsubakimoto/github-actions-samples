@@ -2,7 +2,10 @@ using 'main.bicep'
 
 param location = 'southeastasia'
 param baseName = ''
-param resourceGroupName = 'rg-${baseName}'
 param appServicePlanSkuName = 'B1'
 param appServicePlanSkuTier = 'Basic'
 param logAnalyticsDailyQuotaGb = 1
+param customDomainZoneName = ''
+param customDomainName = ''
+param keyVaultName = ''
+param keyVaultCertificateName = ''
