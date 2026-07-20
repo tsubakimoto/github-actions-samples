@@ -4,7 +4,7 @@ targetScope = 'subscription'
 param location string = 'japaneast'
 
 @description('Base name used to construct resource names')
-param baseName string = 'yuta-gha-samples'
+param baseName string = ''
 
 @description('App Service Plan SKU name')
 param appServicePlanSkuName string = 'B1'
@@ -18,7 +18,7 @@ param logAnalyticsDailyQuotaGb int = 1
 @description('Resource ID of the existing DNS zone for custom domains. Leave empty to skip custom domain configuration.')
 param customDomainZoneId string = ''
 
-@description('Custom domain name; each app becomes {suffix}.{customDomainName}')
+@description('Custom domain name; each app becomes gha-{suffix}.{customDomainName}')
 param customDomainName string = ''
 
 @description('Resource ID of the existing Key Vault holding the TLS certificate for the custom domains')

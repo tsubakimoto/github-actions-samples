@@ -16,7 +16,8 @@ param certificateThumbprint string
 @description('Domain verification ID of the target Web App')
 param customDomainVerificationId string
 
-var fqdn = '${appSuffix}.${customDomainName}'
+var subdomain = 'gha-${appSuffix}'
+var fqdn = '${subdomain}.${customDomainName}'
 
 var dnsZoneIdSegments = split(dnsZoneId, '/')
 var dnsZoneSubscriptionId = dnsZoneIdSegments[2]
@@ -32,7 +33,7 @@ module dnsRecords 'dnsRecords.bicep' = {
   scope: resourceGroup(dnsZoneSubscriptionId, dnsZoneResourceGroupName)
   params: {
     dnsZoneName: dnsZoneName
-    appSuffix: appSuffix
+    appSuffix: subdomain
     cname: '${webAppName}.azurewebsites.net'
     customDomainVerificationId: customDomainVerificationId
   }
