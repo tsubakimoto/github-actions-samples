@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(az bicep *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Read(//tmp/**)"
+    ]
+  }
+}
