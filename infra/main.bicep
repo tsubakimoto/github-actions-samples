@@ -21,11 +21,14 @@ param customDomainZoneId string = ''
 @description('Custom domain name; each app becomes {suffix}.{customDomainName}')
 param customDomainName string = ''
 
-@description('Name of the existing Key Vault holding the TLS certificate for the custom domains')
-param keyVaultName string = ''
+@description('Resource ID of the existing Key Vault holding the TLS certificate for the custom domains')
+param keyVaultId string = ''
 
 @description('Name of the certificate in the Key Vault Certificates blade to use for the custom domains')
 param keyVaultCertificateName string = ''
+
+@description('Object ID of the Microsoft Azure App Service service principal in this tenant, granted Key Vault Secrets User on the custom domain Key Vault')
+param appServicePrincipalId string = 'fd7269af-c321-43d7-b3ad-44db2b00cdd0'
 
 var abbrs = loadJsonContent('abbreviations.json')
 var uniqueSuffix = substring(uniqueString(subscription().subscriptionId, baseName), 0, 4)
@@ -35,7 +38,11 @@ var appServicePlanName = '${abbrs.webServerFarms}${baseName}-${uniqueSuffix}'
 var logAnalyticsName = '${abbrs.operationalInsightsWorkspaces}${baseName}-${uniqueSuffix}'
 var appInsightsName = '${abbrs.insightsComponents}${baseName}-${uniqueSuffix}'
 
-var useCustomDomain = !empty(customDomainZoneId) && !empty(customDomainName) && !empty(keyVaultName) && !empty(keyVaultCertificateName)
+var useCustomDomain = !empty(customDomainZoneId) && !empty(customDomainName) && !empty(keyVaultId) && !empty(keyVaultCertificateName)
+
+var keyVaultIdSegments = split(keyVaultId, '/')
+var keyVaultSubscriptionId = useCustomDomain ? keyVaultIdSegments[2] : subscription().subscriptionId
+var keyVaultResourceGroupName = useCustomDomain ? keyVaultIdSegments[4] : resourceGroupName
 
 var apps = [
   { suffix: 'dotnet6', linuxFxVersion: 'DOTNETCORE|6.0' }
@@ -109,18 +116,39 @@ module webApps 'modules/webApp.bicep' = [for app in apps: {
   }
 }]
 
+module keyVaultAccess 'modules/keyVaultRoleAssignment.bicep' = if (useCustomDomain) {
+  name: 'keyVaultAccess'
+  scope: resourceGroup(keyVaultSubscriptionId, keyVaultResourceGroupName)
+  params: {
+    keyVaultId: keyVaultId
+    principalId: appServicePrincipalId
+  }
+}
+
+module certificate 'modules/certificate.bicep' = if (useCustomDomain) {
+  name: 'certificate'
+  scope: resourceGroup(resourceGroupName)
+  params: {
+    name: '${keyVaultCertificateName}-cert'
+    location: location
+    keyVaultId: keyVaultId
+    keyVaultCertificateName: keyVaultCertificateName
+    serverFarmId: appServicePlan.outputs.id
+  }
+  dependsOn: [
+    keyVaultAccess
+  ]
+}
+
 module customDomains 'modules/customDomain.bicep' = [for (app, i) in apps: if (useCustomDomain) {
   name: 'customDomain-${app.suffix}'
   scope: resourceGroup(resourceGroupName)
   params: {
-    location: location
     appSuffix: app.suffix
     customDomainName: customDomainName
     dnsZoneId: customDomainZoneId
-    keyVaultName: keyVaultName
-    keyVaultCertificateName: keyVaultCertificateName
     webAppName: webApps[i].outputs.name
-    serverFarmId: appServicePlan.outputs.id
+    certificateThumbprint: certificate!.outputs.thumbprint
     customDomainVerificationId: webApps[i].outputs.customDomainVerificationId
   }
 }]

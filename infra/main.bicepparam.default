@@ -7,5 +7,5 @@ param appServicePlanSkuTier = 'Basic'
 param logAnalyticsDailyQuotaGb = 1
 param customDomainZoneId = ''
 param customDomainName = ''
-param keyVaultName = ''
+param keyVaultId = ''
 param keyVaultCertificateName = ''
