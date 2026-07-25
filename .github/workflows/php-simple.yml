@@ -46,7 +46,7 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: php-app
           path: ${{ env.WORKING_DIRECTORY }}/release.zip
