@@ -12,7 +12,7 @@ jobs:
   git-tag-creation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - run: |
           echo "v${{ github.event.inputs.tag-name }}" > TAG_NAME
           git tag $(cat TAG_NAME)

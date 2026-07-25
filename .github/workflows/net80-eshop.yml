@@ -19,7 +19,7 @@ jobs:
   build-eshop:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         with:
           repository: ${{ env.REPOSITORY }}
       - name: Setup .NET

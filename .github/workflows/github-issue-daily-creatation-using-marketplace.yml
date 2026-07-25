@@ -9,7 +9,7 @@ jobs:
   create-issue-daily:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - name: Create an issue
         uses: JasonEtco/create-an-issue@v2.6.0
         env:

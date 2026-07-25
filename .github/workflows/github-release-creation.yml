@@ -26,7 +26,7 @@ jobs:
       url: ${{ steps.release.outputs.upload_url }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       - name: Create a Release
         id: release
