@@ -20,7 +20,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Setup PHP
         uses: shivammathur/setup-php@7c0b4c8c8ebed23eca9ec2802474895d105b11bc

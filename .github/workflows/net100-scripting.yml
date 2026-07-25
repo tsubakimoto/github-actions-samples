@@ -10,7 +10,7 @@ jobs:
       run:
         working-directory: 'dotnet/net10.0/script'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Setup .NET
         id: setup
         uses: actions/setup-dotnet@v4

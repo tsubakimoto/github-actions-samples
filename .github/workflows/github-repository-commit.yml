@@ -28,7 +28,7 @@ jobs:
       changed: ${{ steps.verify-diff.outputs.changed }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Edit a file

@@ -35,7 +35,7 @@ jobs:
       head-branch-name: ${{ steps.commit.outputs.head-branch-name }}
       changed: ${{ steps.verify-diff.outputs.changed }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:

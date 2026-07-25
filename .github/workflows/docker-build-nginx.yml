@@ -18,6 +18,6 @@ jobs:
         working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v7
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag mynginx:${{ env.IMAGE_TAG }}
