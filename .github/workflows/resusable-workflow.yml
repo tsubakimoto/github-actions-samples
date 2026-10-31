@@ -1,3 +1,4 @@
+# 再利用可能ワークフローを呼び出し、呼び出し元のGitHubコンテキストを表示します。
 name: Reusable Workflow (call context)
 
 on:

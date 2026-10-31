@@ -1,3 +1,4 @@
+# Nuxt.jsアプリをZIP形式にまとめ、Azure App Serviceへデプロイします。
 name: Nodejs NuxtJS on App Service with Zip
 
 on:

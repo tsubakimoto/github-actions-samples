@@ -1,3 +1,4 @@
+# IssueやDiscussionなど複数のイベントで起動し、イベント情報を表示します。
 name: Various triggers workflow
 
 on:

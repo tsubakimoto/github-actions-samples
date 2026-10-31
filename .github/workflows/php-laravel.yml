@@ -1,3 +1,4 @@
+# Laravelアプリの依存関係をインストールして成果物を作成し、Azure App Serviceへデプロイします。
 name: PHP Laravel
 
 on:

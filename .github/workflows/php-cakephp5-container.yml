@@ -1,3 +1,4 @@
+# CakePHP 5のDockerイメージをビルドしてGHCRに発行し、Azure App Serviceへデプロイします。
 # https://book.cakephp.org/5/en/installation.html
 name: PHP CakePHP5 Container
 

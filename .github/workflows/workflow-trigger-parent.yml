@@ -1,3 +1,4 @@
+# 手動実行で親ワークフローの例を動かし、後続のworkflow_runを起動します。
 # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run
 name: Workflow trigger parent
 

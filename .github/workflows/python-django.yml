@@ -1,3 +1,4 @@
+# Djangoアプリの依存関係をインストールして成果物を作成し、Azure App Serviceへデプロイします。
 name: Python Django
 
 on:

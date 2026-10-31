@@ -1,3 +1,4 @@
+# Postman CLIでコレクションを実行し、APIテストを行います。
 # https://learning.postman.com/docs/integrations/available-integrations/ci-integrations/github-actions/
 name: Automated API tests using Postman CLI
 

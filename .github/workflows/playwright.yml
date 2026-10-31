@@ -1,3 +1,4 @@
+# Playwrightのブラウザーをセットアップしてテストを実行し、レポートを保存します。
 name: Playwright Tests
 
 on:

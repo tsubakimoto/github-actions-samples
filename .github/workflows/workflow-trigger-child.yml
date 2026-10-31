@@ -1,3 +1,4 @@
+# 親ワークフローの完了後に起動し、成功または失敗の結果を表示します。
 # https://docs.github.com/ja/actions/using-workflows/events-that-trigger-workflows#workflow_run
 name: Workflow trigger child
 

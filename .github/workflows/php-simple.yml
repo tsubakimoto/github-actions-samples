@@ -1,3 +1,4 @@
+# PHPアプリをビルド・パッケージ化し、Azure App Serviceへデプロイします。
 # https://learn.microsoft.com/ja-jp/azure/app-service/configure-language-php?pivots=platform-linux
 name: PHP Simple
 

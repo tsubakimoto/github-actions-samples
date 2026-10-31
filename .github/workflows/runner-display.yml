@@ -1,3 +1,4 @@
+# GitHub-hosted runnerのOS情報を定期実行または手動実行で表示します。
 # https://docs.github.com/en/actions/concepts/runners/github-hosted-runners
 name: Runner display
 

@@ -1,3 +1,4 @@
+# 手動実行でMicrosoft Teamsに通知を送信します。
 # https://github.com/marketplace/actions/notify-teams
 name: Notify to Teams
 

@@ -1,3 +1,4 @@
+# .NET SDKの更新を定期または手動で確認し、`global.json`を更新します。
 # ref: https://github.com/dotnet/extensions/blob/main/.github/workflows/update-sdk.yml
 name: Update .NET SDK
 

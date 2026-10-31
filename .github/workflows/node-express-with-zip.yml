@@ -1,3 +1,4 @@
+# ExpressアプリをZIP形式にまとめ、Azure App Serviceへデプロイします。
 name: Nodejs Express with Zip
 
 on:

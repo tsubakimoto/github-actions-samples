@@ -1,3 +1,4 @@
+# CakePHP 5アプリをビルド・パッケージ化し、Azure App Serviceへデプロイします。
 # https://book.cakephp.org/5/en/installation.html
 name: PHP CakePHP5
 

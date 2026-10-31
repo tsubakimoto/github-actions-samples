@@ -1,3 +1,4 @@
+# Nuxt.jsアプリをAzure Static Web Appsへデプロイし、Pull Requestのクローズ時に環境を削除します。
 name: Nodejs NuxtJS
 
 on:
