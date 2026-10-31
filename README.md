@@ -216,6 +216,8 @@ GitHub Actionsを色々試すリポジトリ
 
 ## Azure
 
+- [GitHub Actions から Azure に OIDC 接続する設定](setup-azure-credential.md)：Entra ID の federated credential、Azure RBAC、GitHub Environment の設定
+
 ### App Service
 https://github.com/marketplace/actions/azure-app-service-settings
 
