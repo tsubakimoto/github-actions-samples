@@ -1,3 +1,4 @@
+# GitHub Actionsで簡単な挨拶メッセージを出力します。
 name: Hello world
 
 on:

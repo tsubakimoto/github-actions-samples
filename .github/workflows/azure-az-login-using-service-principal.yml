@@ -1,3 +1,4 @@
+# サービスプリンシパルでAzureにログインし、Azure CLIコマンドを実行します。
 # https://learn.microsoft.com/ja-jp/azure/developer/github/connect-from-azure
 # https://github.com/Azure/actions-workflow-samples/blob/master/assets/create-secrets-for-GitHub-workflows.md
 

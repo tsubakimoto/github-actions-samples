@@ -1,3 +1,4 @@
+# GitHub ActionsのgithubコンテキストをJSON形式でログに出力します。
 # https://docs.github.com/en/actions/learn-github-actions/contexts#example-printing-context-information-to-the-log
 
 name: GitHub Actions Context Dump

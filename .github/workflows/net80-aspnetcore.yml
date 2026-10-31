@@ -1,3 +1,4 @@
+# .NET 8のASP.NET Coreアプリをビルドし、Azure App Serviceへデプロイします。
 name: ASP.NET Core 8.0
 
 on:

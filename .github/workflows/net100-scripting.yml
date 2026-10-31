@@ -1,3 +1,4 @@
+# .NET 10 SDKでC#スクリプトを実行します。
 name: .NET 10.0 Script
 
 on:

@@ -1,3 +1,4 @@
+# 接続文字列を使ってAzure SQLにSQLスクリプトを実行します。
 # https://github.com/Azure/sql-action
 name: Azure SQL using Connection String
 

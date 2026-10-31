@@ -1,3 +1,4 @@
+# AI推論アクションでプロンプトを処理し、応答をジョブサマリーに出力します。
 # https://github.com/actions/ai-inference
 
 name: AI Inference

@@ -1,3 +1,4 @@
+# 手動実行時に入力された名前を使って挨拶を表示します。
 name: Manual workflow
 
 on:

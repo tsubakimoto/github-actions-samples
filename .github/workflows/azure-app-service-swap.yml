@@ -1,3 +1,4 @@
+# Azure App Serviceのデプロイスロットを入れ替えます。
 name: Azure App Service Swap
 
 on:

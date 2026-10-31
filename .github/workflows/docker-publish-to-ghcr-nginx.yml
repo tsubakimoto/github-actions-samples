@@ -1,3 +1,4 @@
+# NginxのDockerイメージをビルドしてGHCRに発行し、署名します。
 name: Publish Nginx Image to ghcr.io
 
 on:

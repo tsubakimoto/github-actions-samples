@@ -1,3 +1,4 @@
+# Pull Requestでdotnet-formatアクションを実行して.NETコードを整形します。
 # https://github.com/marketplace/actions/dotnet-format-on-pull-request
 name: .NET 8.0 tsubakimoto/action-dotnet-format
 

@@ -1,3 +1,4 @@
+# .NETアプリを発行し、ビルド成果物の来歴をattestationとして生成します。
 # https://github.blog/security/supply-chain-security/configure-github-artifact-attestations-for-secure-cloud-native-delivery/
 # https://github.blog/changelog/2024-06-25-artifact-attestations-is-generally-available/
 name: GitHub Artifact Attestations

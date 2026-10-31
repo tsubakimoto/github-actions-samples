@@ -1,3 +1,4 @@
+# Environmentの入力値と変数をログに表示します。
 name: GitHub Actions environment inputs
 
 on:

@@ -1,3 +1,4 @@
+# GitHub CLIを使ってGitHub Issueを作成します。
 # https://cli.github.com/manual/gh_issue
 
 name: GitHub Issue Creation using GitHub CLI

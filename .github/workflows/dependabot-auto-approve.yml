@@ -1,3 +1,4 @@
+# DependabotのPull Requestを検出し、自動承認します。
 # https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/automate-dependabot-with-actions#automatically-approving-a-pull-request
 name: Dependabot auto-approve
 on: pull_request

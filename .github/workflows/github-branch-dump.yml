@@ -1,3 +1,4 @@
+# GitHub Actionsの実行対象となったブランチ情報をログに出力します。
 name: GitHub Branch Dump
 
 on:

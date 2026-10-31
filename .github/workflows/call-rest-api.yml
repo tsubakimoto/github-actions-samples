@@ -1,3 +1,4 @@
+# GitHub Actionsから外部のREST APIを呼び出します。
 name: Call REST API from Actions
 
 on:

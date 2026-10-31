@@ -1,3 +1,4 @@
+# GitHub Modelsにプロンプトを送信し、モデルの応答を取得します。
 name: GitHub Models from Actions
 
 on:

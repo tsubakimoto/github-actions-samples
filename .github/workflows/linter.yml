@@ -1,3 +1,4 @@
+# Super-Linterでリポジトリ内のコードを検査します。
 # https://github.com/marketplace/actions/super-linter
 name: Super Linter
 

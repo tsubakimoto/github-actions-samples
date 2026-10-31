@@ -1,3 +1,4 @@
+# Azure App Serviceにログインし、アプリの設定を適用します。
 # https://github.com/marketplace/actions/azure-app-service-settings
 name: Azure App Service Settings
 

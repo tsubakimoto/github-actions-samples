@@ -1,3 +1,4 @@
+# Marketplaceアクションを使ってGitHub Releaseを作成します。
 # https://github.com/marketplace/actions/automatic-releases
 name: Publish content to Release using marvinpinto/action-automatic-releases
 

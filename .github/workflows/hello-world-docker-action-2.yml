@@ -1,3 +1,4 @@
+# hello-world-docker-actionを2回実行する例です。
 # https://github.com/actions/hello-world-docker-action
 name: Hello world docker action 2
 

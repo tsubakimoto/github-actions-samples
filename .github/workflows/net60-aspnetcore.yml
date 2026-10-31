@@ -1,3 +1,4 @@
+# .NET 6のASP.NET Coreアプリをビルドし、Azure App Serviceへデプロイします。
 name: ASP.NET Core 6.0
 
 on:

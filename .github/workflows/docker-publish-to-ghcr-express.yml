@@ -1,3 +1,4 @@
+# ExpressのDockerイメージをビルドしてGHCRに発行し、署名します。
 name: Push Express Image to ghcr.io
 
 on:

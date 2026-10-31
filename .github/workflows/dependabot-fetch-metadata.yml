@@ -1,3 +1,4 @@
+# DependabotのPull Request情報を取得し、ラベルなどのメタデータを設定します。
 # https://docs.github.com/en/code-security/tutorials/secure-your-dependencies/automate-dependabot-with-actions#fetching-metadata-about-a-pull-request
 name: Dependabot fetch metadata
 on: pull_request

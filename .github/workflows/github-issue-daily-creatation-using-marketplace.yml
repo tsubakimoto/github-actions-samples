@@ -1,3 +1,4 @@
+# 定期実行でMarketplaceアクションからGitHub Issueを作成します。
 # https://github.com/marketplace/actions/create-an-issue
 
 name: GitHub Issue Daily Creation using Marketplace

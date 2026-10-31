@@ -1,3 +1,4 @@
+# .NET 9のASP.NET Coreアプリをビルドし、Azure App Serviceへデプロイします。
 name: ASP.NET Core 9.0
 
 on:

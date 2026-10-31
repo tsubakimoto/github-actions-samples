@@ -1,3 +1,4 @@
+# NginxのDockerイメージをビルドします。
 name: Build Nginx Image
 
 on:

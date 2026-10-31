@@ -1,3 +1,4 @@
+# 指定した名前でGitタグを作成します。
 name: Git tag creation
 
 on:

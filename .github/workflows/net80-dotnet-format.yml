@@ -1,3 +1,4 @@
+# dotnet formatで.NETコードを整形し、変更をPull Requestとして提案します。
 # https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-format
 name: .NET 8.0 dotnet-format
 

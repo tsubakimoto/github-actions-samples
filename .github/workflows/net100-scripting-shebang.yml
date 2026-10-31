@@ -1,3 +1,4 @@
+# .NET 10のC#スクリプトをshebang形式で実行します。
 name: .NET 10.0 Script (shebang)
 
 on:

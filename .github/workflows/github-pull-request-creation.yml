@@ -1,3 +1,4 @@
+# 指定したブランチ間の差分からPull Requestを作成する再利用可能ワークフローです。
 name: GitHub pull request creation
 
 on:

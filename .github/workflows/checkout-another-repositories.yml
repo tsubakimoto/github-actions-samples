@@ -1,3 +1,4 @@
+# GitHub Actionsから別のGitリポジトリを取得して処理します。
 name: Checkout another repositories
 
 on:

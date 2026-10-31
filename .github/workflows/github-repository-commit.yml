@@ -1,3 +1,4 @@
+# ファイルをブランチにコミットし、再利用可能ワークフロー経由でPull Requestを作成します。
 # https://github.com/skills/hello-github-actions
 name: GitHub repository commit
 

@@ -1,3 +1,4 @@
+# コンテナ内でジョブを実行し、実行環境がコンテナであることを確認します。
 # https://docs.github.com/ja/actions/using-jobs/running-jobs-in-a-container
 name: Docker run in workflow
 

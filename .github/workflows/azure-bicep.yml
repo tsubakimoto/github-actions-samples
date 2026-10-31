@@ -1,3 +1,4 @@
+# BicepテンプレートでAzureリソースをデプロイし、設定に応じてリソースグループを削除します。
 # https://learn.microsoft.com/ja-jp/azure/azure-resource-manager/bicep/deploy-github-actions
 name: Azure Bicep
 

@@ -1,3 +1,4 @@
+# hello-world-docker-actionを使って挨拶を出力します。
 # https://github.com/actions/hello-world-docker-action
 name: Hello world docker action
 
